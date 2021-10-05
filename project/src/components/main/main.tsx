@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid';
 import Card from '../card/card';
+import Logo from '../logo/logo';
 
 type MainProps = {
   counter: number,
@@ -16,24 +17,20 @@ function Main({counter}: MainProps): JSX.Element {
         <header className="header">
           <div className="container">
             <div className="header__wrapper">
-              <div className="header__left">
-                <span className="header__logo-link header__logo-link--active">
-                  <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-                </span>
-              </div>
+              <Logo/>
               <nav className="header__nav">
                 <ul className="header__nav-list">
                   <li className="header__nav-item user">
-                    <span className="header__nav-link header__nav-link--profile">
+                    <a href="/" className="header__nav-link header__nav-link--profile">
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
                       <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    </span>
+                    </a>
                   </li>
                   <li className="header__nav-item">
-                    <span className="header__nav-link" >
+                    <a href='/' className="header__nav-link" >
                       <span className="header__signout">Sign out</span>
-                    </span>
+                    </a>
                   </li>
                 </ul>
               </nav>
@@ -47,34 +44,34 @@ function Main({counter}: MainProps): JSX.Element {
             <section className="locations container">
               <ul className="locations__list tabs__list">
                 <li className="locations__item">
-                  <span className="locations__item-link tabs__item" >
+                  <a href='/' className="locations__item-link tabs__item" >
                     <span>Paris</span>
-                  </span>
+                  </a>
                 </li>
                 <li className="locations__item">
-                  <span className="locations__item-link tabs__item" >
+                  <a href='/' className="locations__item-link tabs__item" >
                     <span>Cologne</span>
-                  </span>
+                  </a>
                 </li>
                 <li className="locations__item">
-                  <span className="locations__item-link tabs__item" >
+                  <a href='/' className="locations__item-link tabs__item" >
                     <span>Brussels</span>
-                  </span>
+                  </a>
                 </li>
                 <li className="locations__item">
-                  <span className="locations__item-link tabs__item tabs__item--active">
+                  <a href='/' className="locations__item-link tabs__item tabs__item--active">
                     <span>Amsterdam</span>
-                  </span>
+                  </a>
                 </li>
                 <li className="locations__item">
-                  <span className="locations__item-link tabs__item">
+                  <a href='/' className="locations__item-link tabs__item">
                     <span>Hamburg</span>
-                  </span>
+                  </a>
                 </li>
                 <li className="locations__item">
-                  <span className="locations__item-link tabs__item" >
+                  <a href='/' className="locations__item-link tabs__item" >
                     <span>Dusseldorf</span>
-                  </span>
+                  </a>
                 </li>
               </ul>
             </section>

@@ -5,9 +5,9 @@ function Card(): JSX.Element {
         <span>Premium</span>
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <span>
+        <a href='/'>
           <img className="place-card__image" src="img/apartment-01.jpg" width="260" height="200" alt="Place"/>
-        </span>
+        </a>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -29,7 +29,7 @@ function Card(): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <span>Beautiful &amp; luxurious apartment at great location</span>
+          <a href="/">Beautiful &amp; luxurious apartment at great location</a>
         </h2>
         <p className="place-card__type">Apartment</p>
       </div>
