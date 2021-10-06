@@ -1,3 +1,5 @@
+import Logo from '../logo/logo';
+
 function Favorites (): JSX.Element {
   return (
     <>
@@ -8,24 +10,20 @@ function Favorites (): JSX.Element {
         <header className="header">
           <div className="container">
             <div className="header__wrapper">
-              <div className="header__left">
-                <a className="header__logo-link" href="main.html">
-                  <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-                </a>
-              </div>
+              <Logo/>
               <nav className="header__nav">
                 <ul className="header__nav-list">
                   <li className="header__nav-item user">
-                    <span className="header__nav-link header__nav-link--profile" >
+                    <a href='/' className="header__nav-link header__nav-link--profile" >
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
                       <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    </span>
+                    </a>
                   </li>
                   <li className="header__nav-item">
-                    <span className="header__nav-link" >
+                    <a href='/' className="header__nav-link" >
                       <span className="header__signout">Sign out</span>
-                    </span>
+                    </a>
                   </li>
                 </ul>
               </nav>
@@ -41,9 +39,9 @@ function Favorites (): JSX.Element {
                 <li className="favorites__locations-items">
                   <div className="favorites__locations locations locations--current">
                     <div className="locations__item">
-                      <span className="locations__item-link">
+                      <a href='/' className="locations__item-link">
                         <span>Amsterdam</span>
-                      </span>
+                      </a>
                     </div>
                   </div>
                   <div className="favorites__places">
@@ -73,7 +71,7 @@ function Favorites (): JSX.Element {
                           </div>
                         </div>
                         <h2 className="place-card__name">
-                          <span>Nice, cozy, warm big bed apartment</span>
+                          <a href='/'>Nice, cozy, warm big bed apartment</a>
                         </h2>
                         <p className="place-card__type">Apartment</p>
                       </div>
@@ -81,9 +79,9 @@ function Favorites (): JSX.Element {
 
                     <article className="favorites__card place-card">
                       <div className="favorites__image-wrapper place-card__image-wrapper">
-                        <span>
+                        <a href='/'>
                           <img className="place-card__image" src="img/room-small.jpg" width="150" height="110" alt="Place"/>
-                        </span>
+                        </a>
                       </div>
                       <div className="favorites__card-info place-card__info">
                         <div className="place-card__price-wrapper">
@@ -105,7 +103,7 @@ function Favorites (): JSX.Element {
                           </div>
                         </div>
                         <h2 className="place-card__name">
-                          <span>Wood and stone place</span>
+                          <a href='/'>Wood and stone place</a>
                         </h2>
                         <p className="place-card__type">Private room</p>
                       </div>
@@ -116,17 +114,17 @@ function Favorites (): JSX.Element {
                 <li className="favorites__locations-items">
                   <div className="favorites__locations locations locations--current">
                     <div className="locations__item">
-                      <span className="locations__item-link">
+                      <a href='/' className="locations__item-link">
                         <span>Cologne</span>
-                      </span>
+                      </a>
                     </div>
                   </div>
                   <div className="favorites__places">
                     <article className="favorites__card place-card">
                       <div className="favorites__image-wrapper place-card__image-wrapper">
-                        <span>
+                        <a href='/'>
                           <img className="place-card__image" src="img/apartment-small-04.jpg" width="150" height="110" alt="Place"/>
-                        </span>
+                        </a>
                       </div>
                       <div className="favorites__card-info place-card__info">
                         <div className="place-card__price-wrapper">
@@ -148,7 +146,7 @@ function Favorites (): JSX.Element {
                           </div>
                         </div>
                         <h2 className="place-card__name">
-                          <span>White castle</span>
+                          <a href='/'>White castle</a>
                         </h2>
                         <p className="place-card__type">Apartment</p>
                       </div>
