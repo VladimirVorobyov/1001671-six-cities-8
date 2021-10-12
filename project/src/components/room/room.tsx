@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useParams } from 'react-router';
-import {OffersType,OfferType} from '../../types/offers-type';
+import {OffersType} from '../../types/offers-type';
 import Card from '../card/card';
 import Comment from '../comment/comment';
+import Error from '../error/error';
 import Logo from '../logo/logo';
 import UserComment from '../user-comment/user-comment';
 import DescriptionRoom from './description-room';
@@ -23,10 +24,9 @@ function Room ({offers,setActive,active}:RoomProps): JSX.Element {
     id: string;
   }
   const {id}:IdParams = useParams();
-  const offery : OfferType = offers[0];
-  const offer:any=(id) ? offers.find((item)=>item.id === id): offers[0];
+  const offer = offers.find((item)=>item.id === id);
 
-  return (
+  return ((offer)?
     <>
       <div style={{display: 'none'}}>
         <svg xmlns="http://www.w3.org/2000/svg"><symbol id="icon-arrow-select" viewBox="0 0 7 4"><path fillRule="evenodd" clipRule="evenodd" d="M0 0l3.5 2.813L7 0v1.084L3.5 4 0 1.084V0z"></path></symbol><symbol id="icon-bookmark" viewBox="0 0 17 18"><path d="M3.993 2.185l.017-.092V2c0-.554.449-1 .99-1h10c.522 0 .957.41.997.923l-2.736 14.59-4.814-2.407-.39-.195-.408.153L1.31 16.44 3.993 2.185z"></path></symbol><symbol id="icon-star" viewBox="0 0 13 12"><path fillRule="evenodd" clipRule="evenodd" d="M6.5 9.644L10.517 12 9.451 7.56 13 4.573l-4.674-.386L6.5 0 4.673 4.187 0 4.573 3.549 7.56 2.483 12 6.5 9.644z"></path></symbol></svg>
@@ -60,12 +60,12 @@ function Room ({offers,setActive,active}:RoomProps): JSX.Element {
           <section className="property">
             <div className="property__gallery-container container">
               <div className="property__gallery">
-                {offery.fullImg.map((item)=><FullImgRoom img={item} key={item}/>)}
+                {offer.fullImg.map((item)=><FullImgRoom img={item} key={item}/>)}
               </div>
             </div>
             <div className="property__container container">
               <div className="property__wrapper">
-                {offer.premium &&
+                {offer?.premium &&
                 <div className="place-card__mark">
                   <span>
                    Premium
@@ -107,7 +107,7 @@ function Room ({offers,setActive,active}:RoomProps): JSX.Element {
                 <div className="property__inside">
                   <h2 className="property__inside-title">What&apos;s inside</h2>
                   <ul className="property__inside-list">
-                    {offery.things.map((item)=><InsideList things={item} key={item}/>)}
+                    {offer.things.map((item)=><InsideList things={item} key={item}/>)}
                   </ul>
                 </div>
                 <div className="property__host">
@@ -124,12 +124,11 @@ function Room ({offers,setActive,active}:RoomProps): JSX.Element {
                     </span>
                   </div>
                   <div className="property__description">
-                    {offery.description.map((item)=><DescriptionRoom title={item} key={item}/>)}
+                    {offer.description.map((item)=><DescriptionRoom title={item} key={item}/>)}
                   </div>
                 </div>
                 <section className="property__reviews reviews">
-                  {offery.commentsId.length}
-                  {offery.commentsId.map((item,i)=> <UserComment key={item.id} i={i} offer={item}/>)}
+                  {offer.commentsId.map((item,i)=> <UserComment key={item.id} i={i} offer={item}/>)}
                   <Comment setForm={setForm} form={form}/>
                 </section>
               </div>
@@ -147,7 +146,7 @@ function Room ({offers,setActive,active}:RoomProps): JSX.Element {
           </div>
         </main>
       </div>
-    </>
+    </>:<Error/>
   );
 }
 

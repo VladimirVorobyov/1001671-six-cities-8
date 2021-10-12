@@ -11,7 +11,11 @@ type FormProps = {
 
 function Comment ({setForm,form}:FormProps): JSX.Element{
   return(
-    <form className="reviews__form form" action="#" method="post">
+    <form className="reviews__form form" action="#" method="post" onSubmit={(e)=>
+    {
+      e.preventDefault();
+    }}
+    >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <input className="form__rating-input visually-hidden" name="rating"
@@ -75,10 +79,6 @@ function Comment ({setForm,form}:FormProps): JSX.Element{
           {
             e.preventDefault();
             setForm({rating:'',discription:''});
-          }}
-          onKeyPress={(e)=>
-          {
-            e.preventDefault();
           }}
         >
             Submit
