@@ -1,10 +1,8 @@
 import {OfferType} from '../../types/offers-type';
-import { Link } from 'react-router-dom';
-import {AppRoute} from '../../const';
-// import { MouseEvent } from 'react';
+import { Link} from 'react-router-dom';
 
 type CardScreenProps = {
-  el:OfferType;
+  item:OfferType;
   setActive:(a:string)=>void;
   active:string;
 }
@@ -18,10 +16,10 @@ const style = {
 };
 
 
-function Card({el,active,setActive}:CardScreenProps): JSX.Element {
+function Card({item,active,setActive}:CardScreenProps): JSX.Element {
   return(
-    <article className="cities__place-card place-card" onMouseOver={()=>setActive(el.id)}>
-      {el.premium &&
+    <article className="cities__place-card place-card" onMouseOver={()=>setActive(item.id)}>
+      {item.premium &&
       <div className="place-card__mark">
         <span>
           Premium
@@ -29,17 +27,17 @@ function Card({el,active,setActive}:CardScreenProps): JSX.Element {
       </div> }
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href='/'>
-          <img className="place-card__image" src={el.img} width="260" height="200" alt="Place"/>
+          <img className="place-card__image" src={item.img} width="260" height="200" alt="Place"/>
         </a>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">{el.cost}</b>
+            <b className="place-card__price-value">{item.cost}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button className="place-card__bookmark-button button" type="button">
-            <svg style={el.favorites ? style.svg : style.svgN} className="place-card__bookmark-icon" width="18" height="19">
+            <svg style={item.favorites ? style.svg : style.svgN} className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
             <span className="visually-hidden">To bookmarks</span>
@@ -52,9 +50,9 @@ function Card({el,active,setActive}:CardScreenProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={AppRoute.Room}>{el.name}</Link>
+          <Link to={`/offer/${active}`}>{item.name}</Link>
         </h2>
-        <p className="place-card__type">{el.type}</p>
+        <p className="place-card__type">{item.type}</p>
       </div>
     </article>
   );

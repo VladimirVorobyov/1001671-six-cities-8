@@ -29,8 +29,8 @@ function CardsList({counter,offers,setActive,active}: ListProps): JSX.Element{
           </ul>
         </form>
         <div className="cities__places-list places__list tabs__content">
-          {offers.map((e)=>
-            <Card key={e.id} el={e} active={active} setActive={setActive} />)}
+          {offers.map((item)=>
+            <Card key={item.id} item={item} active={active} setActive={setActive} />)}
         </div>
       </section>
       <div className="cities__right-section">

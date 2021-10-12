@@ -6,17 +6,16 @@ import Favorites from '../favorites/favorites';
 import Room from '../room/room';
 import {AppRoute,AuthorizationStatus} from '../../const';
 import PrivateRoute from '../private-route/private-route';
-import {OffersType,CommentsOfferType} from '../../types/offers-type';
+import {OffersType} from '../../types/offers-type';
 import { useState } from 'react';
 
 
 type AppScreenProps = {
   counter: number;
-  comments:CommentsOfferType;
   offers:OffersType;
 }
 
-function App({ counter,comments,offers}: AppScreenProps): JSX.Element {
+function App({ counter,offers}: AppScreenProps): JSX.Element {
   const [active, setActive] = useState('');
   return (
     <BrowserRouter>
@@ -40,7 +39,6 @@ function App({ counter,comments,offers}: AppScreenProps): JSX.Element {
         <Route path={AppRoute.Room} exact>
           <Room
             offers={offers}
-            comments={comments}
             active = {active}
             setActive = {setActive}
           />

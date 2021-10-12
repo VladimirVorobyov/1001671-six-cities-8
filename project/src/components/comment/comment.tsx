@@ -1,21 +1,21 @@
 import {MouseEvent} from 'react';
 
-type ar = {
+type FunctionProps = {
   rating: string,
   discription: string,
 }
 type FormProps = {
-  SetForm:(a:ar)=>void;
-  form: ar;
+  setForm:(props:FunctionProps)=>void;
+  form: FunctionProps;
 }
 
-function Comment ({SetForm,form}:FormProps): JSX.Element{
+function Comment ({setForm,form}:FormProps): JSX.Element{
   return(
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <input className="form__rating-input visually-hidden" name="rating"
-          onChange={(e)=>SetForm({...form,...{rating:'5'}})}
+          onChange={()=>setForm({...form,...{rating:'5'}})}
           value="5" id="5-stars" type="radio"
         />
         <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
@@ -25,7 +25,7 @@ function Comment ({SetForm,form}:FormProps): JSX.Element{
         </label>
 
         <input className="form__rating-input visually-hidden" name="rating" value="4"
-          onChange={(e)=>SetForm({...form,...{rating:'4'}})} id="4-stars" type="radio"
+          onChange={()=>setForm({...form,...{rating:'4'}})} id="4-stars" type="radio"
         />
         <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
           <svg className="form__star-image" width="37" height="33">
@@ -34,7 +34,7 @@ function Comment ({SetForm,form}:FormProps): JSX.Element{
         </label>
 
         <input className="form__rating-input visually-hidden" name="rating" value="3"
-          onChange={(e)=>SetForm({...form,...{rating:'3'}})}id="3-stars" type="radio"
+          onChange={()=>setForm({...form,...{rating:'3'}})}id="3-stars" type="radio"
         />
         <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
           <svg className="form__star-image" width="37" height="33">
@@ -43,7 +43,7 @@ function Comment ({SetForm,form}:FormProps): JSX.Element{
         </label>
 
         <input className="form__rating-input visually-hidden" name="rating" value="2"
-          onChange={(e)=>SetForm({...form,...{rating:'2'}})} id="2-stars" type="radio"
+          onChange={()=>setForm({...form,...{rating:'2'}})} id="2-stars" type="radio"
         />
         <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
           <svg className="form__star-image" width="37" height="33">
@@ -52,7 +52,7 @@ function Comment ({SetForm,form}:FormProps): JSX.Element{
         </label>
 
         <input className="form__rating-input visually-hidden" name="rating" value="1"
-          onChange={(e)=>SetForm({...form,...{rating:'1'}})} id="1-star" type="radio"
+          onChange={()=>setForm({...form,...{rating:'1'}})} id="1-star" type="radio"
         />
         <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
           <svg className="form__star-image" width="37" height="33">
@@ -61,7 +61,7 @@ function Comment ({SetForm,form}:FormProps): JSX.Element{
         </label>
       </div>
       <textarea className="reviews__textarea form__textarea"
-        onChange={(e)=>SetForm({...form,...{discription:e.target.value}})}
+        onChange={(e)=>setForm({...form,...{discription:e.target.value}})}
         id="review" name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
       >
@@ -74,7 +74,11 @@ function Comment ({SetForm,form}:FormProps): JSX.Element{
           onClick={(e:MouseEvent<HTMLButtonElement>)=>
           {
             e.preventDefault();
-            SetForm({rating:'',discription:''});
+            setForm({rating:'',discription:''});
+          }}
+          onKeyPress={(e)=>
+          {
+            e.preventDefault();
           }}
         >
             Submit
