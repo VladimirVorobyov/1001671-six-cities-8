@@ -1,4 +1,3 @@
-import { nanoid} from 'nanoid';
 import { OffersType} from '../types/offers-type';
 import photo1 from '../img/apartment-01.jpg';
 import photo2 from '../img/apartment-02.jpg';
@@ -11,7 +10,7 @@ import avatar2 from '../img/avatar-max.jpg';
 import comments from './comments';
 
 const offers:OffersType = [{
-  id: nanoid(),
+  id: '123',
   name:'Studio at great location',
   img:photo1,
   premium:false,
@@ -29,7 +28,7 @@ const offers:OffersType = [{
   favorites: false,
 },
 {
-  id: nanoid(),
+  id: '234',
   name:'Greate Hotel',
   img:photo2,
   premium:true,
@@ -47,7 +46,7 @@ const offers:OffersType = [{
   favorites: false,
 },
 {
-  id: nanoid(),
+  id: '345',
   name:'Big House',
   img:photo3,
   premium:false,
@@ -65,7 +64,7 @@ const offers:OffersType = [{
   favorites: true,
 },
 {
-  id: nanoid(),
+  id: '567',
   name:'Beautiful & luxurious studio at great location',
   img:photo1,
   premium:true,
