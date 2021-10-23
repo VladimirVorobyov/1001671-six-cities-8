@@ -128,7 +128,7 @@ function Room ({offers,setActive,active}:RoomProps): JSX.Element {
                   </div>
                 </div>
                 <section className="property__reviews reviews">
-                  {offer.commentsId.map((item,i)=> <UserComment key={item.id} i={i} offer={item}/>)}
+                  {offer.comments.map((item,i)=> <UserComment key={item.id} index={i} offer={item}/>)}
                   <Comment setForm={setForm} form={form}/>
                 </section>
               </div>

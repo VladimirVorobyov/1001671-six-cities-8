@@ -2,13 +2,13 @@ import {CommentOfferType} from '../../types/offers-type';
 
 type CommentProps = {
   offer: CommentOfferType;
-  i: number;
+  index: number;
 }
 
-function UserComment ({offer,i}:CommentProps): JSX.Element{
+function UserComment ({offer,index}:CommentProps): JSX.Element{
   return(
     <>
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{i+1}</span></h2>
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{index+1}</span></h2>
       <ul className="reviews__list">
         <li className="reviews__item">
           <div className="reviews__user user">
