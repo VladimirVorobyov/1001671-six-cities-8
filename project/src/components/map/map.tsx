@@ -46,7 +46,7 @@ function Map({offers,active}:MapType): JSX.Element {
   }, [map, offers,active]);
   return (
     <div
-      style={{height: '500px'}}
+      style={{height: '100%'}}
       ref={mapRef}
     >
     </div>
