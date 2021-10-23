@@ -1,5 +1,6 @@
 import {OffersType} from '../../types/offers-type';
 import Card from '../card/card';
+import Map from '../map/map';
 type ListProps = {
   counter: number,
   offers:OffersType,
@@ -34,7 +35,9 @@ function CardsList({counter,offers,setActive,active}: ListProps): JSX.Element{
         </div>
       </section>
       <div className="cities__right-section">
-        <section className="cities__map map"></section>
+        <section className="cities__map map">
+          <Map offers={offers} active={active}/>
+        </section>
       </div>
     </div></div>);
 }

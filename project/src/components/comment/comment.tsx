@@ -1,12 +1,12 @@
 import {MouseEvent} from 'react';
 
-type FunctionProps = {
+type ReviewProps = {
   rating: string,
   discription: string,
 }
 type FormProps = {
-  setForm:(props:FunctionProps)=>void;
-  form: FunctionProps;
+  setForm:(props:ReviewProps)=>void;
+  form: ReviewProps;
 }
 
 function Comment ({setForm,form}:FormProps): JSX.Element{

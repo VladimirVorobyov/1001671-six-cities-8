@@ -3,7 +3,7 @@ import { Link} from 'react-router-dom';
 
 type CardScreenProps = {
   item:OfferType;
-  setActive:(a:string)=>void;
+  setActive:(id:string)=>void;
   active:string;
 }
 const style = {
