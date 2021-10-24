@@ -3,14 +3,13 @@ import UserComment from './user-comment';
 
 type CommentProps = {
   comments: CommentsOfferType;
-  index: number;
 }
 
-function ListComment ({comments,index}:CommentProps): JSX.Element{
+function ListComment ({comments}:CommentProps): JSX.Element{
   return(
     <>
       <h2 className="reviews__title">Reviews &middot;
-        <span className="reviews__amount">{index}</span>
+        <span className="reviews__amount">{comments.length}</span>
       </h2>
       <ul className="reviews__list">
         {comments.map((item)=> <UserComment key={item.id}  offer={item}/>)}

@@ -21,7 +21,7 @@ function UserComment ({offer}:CommentProps): JSX.Element{
           </div>
         </div>
         <p className="reviews__text">{offer.description}</p>
-        <time className="reviews__time" dateTime="2019-04-24">{offer.date}</time>
+        <time className="reviews__time" dateTime={offer.date}>{offer.date}</time>
       </div>
     </li>
   );

@@ -130,7 +130,7 @@ function Room ({offers,setActive,active}:RoomProps): JSX.Element {
                   </div>
                 </div>
                 <section className="property__reviews reviews">
-                  <ListComment index={offer.comments.length} comments={offer.comments}/>
+                  <ListComment comments={offer.comments}/>
                   <Comment setForm={setForm} form={form}/>
                 </section>
               </div>
