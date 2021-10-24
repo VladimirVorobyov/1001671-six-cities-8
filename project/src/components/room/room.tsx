@@ -5,7 +5,7 @@ import Card from '../card/card';
 import Comment from '../comment/comment';
 import Error from '../error/error';
 import Logo from '../logo/logo';
-import UserComment from '../user-comment/user-comment';
+import ListComment from '../user-comment/list-comment';
 import DescriptionRoom from './description-room';
 import FullImgRoom from './full-img-room';
 import InsideList from './inside-list';
@@ -130,7 +130,7 @@ function Room ({offers,setActive,active}:RoomProps): JSX.Element {
                   </div>
                 </div>
                 <section className="property__reviews reviews">
-                  {offer.comments.map((item,i)=> <UserComment key={item.id} index={i} offer={item}/>)}
+                  <ListComment comments={offer.comments}/>
                   <Comment setForm={setForm} form={form}/>
                 </section>
               </div>
