@@ -25,7 +25,7 @@ export type OfferType = {
   nameBoss: string,
   imgBoss: string,
   comments : CommentOfferType[],
-  cost: string,
+  cost: number,
   favorites:boolean,
   lat:number,
   lng: number,

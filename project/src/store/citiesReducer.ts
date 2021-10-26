@@ -30,6 +30,21 @@ const cityReducer = (state: State = initialState, action: Actions): State => {
         ...state,
         map: mapMock.find((item) => item.city === action.payload),
       };
+    case ActionType.LowToHigh:
+      return {
+        ...state,
+        offers: action.payload.sort((a, b) => a.cost - b.cost),
+      };
+    case ActionType.HighToLow:
+      return {
+        ...state,
+        offers: action.payload.sort((a, b) => b.cost - a.cost),
+      };
+    case ActionType.TopRated:
+      return {
+        ...state,
+        offers: action.payload.sort((a, b) => b.rating - a.rating),
+      };
     default:
       return state;
   }

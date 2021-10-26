@@ -40,10 +40,8 @@ function Card({ item, active, setActive }: CardScreenProps): JSX.Element {
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">{item.cost}</b>
-            <span className="place-card__price-text">
-              &#47;&nbsp;night
-            </span>
+            <b className="place-card__price-value">{`\u20AC${item.cost}`}</b>
+            <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button className="place-card__bookmark-button button" type="button">
             <svg
