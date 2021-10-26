@@ -32,4 +32,9 @@ export type OfferType = {
 };
 
 export type OffersType = OfferType[];
-export type MapType = Pick<OfferType, 'city' | 'lat' |'lng'> & {zoom: number};
+export type MapType = Pick<OfferType, 'city' | 'lat' | 'lng'> & {
+  zoom: number;
+  active: boolean;
+  countOffer: number;
+};
+export type MapsType = MapType[];

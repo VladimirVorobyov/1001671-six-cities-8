@@ -6,44 +6,36 @@ import Favorites from '../favorites/favorites';
 import Room from '../room/room';
 import {AppRoute,AuthorizationStatus} from '../../const';
 import PrivateRoute from '../private-route/private-route';
-import {OffersType} from '../../types/offers-type';
+import offers from '../../mocks/offers';
 import { useState } from 'react';
+import {useTypeSelector} from '../../hooks/useTypeSelector';
 
-
-type AppScreenProps = {
-  counter: number;
-  offers:OffersType;
-}
-
-function App({ counter,offers}: AppScreenProps): JSX.Element {
+function App(): JSX.Element {
   const [active, setActive] = useState('');
+  const offersActive = useTypeSelector((state) => state.offers);
   return (
     <BrowserRouter>
       <Switch>
         <Route path={AppRoute.Main} exact>
           <Main
-            offers={offers}
-            counter={counter}
-            active = {active}
-            setActive = {setActive}
+            offersActive={offersActive}
+            active={active}
+            setActive={setActive}
           />
         </Route>
         <Route path={AppRoute.SignIn} exact>
-          <Login/>
+          <Login />
         </Route>
-        <PrivateRoute path={AppRoute.Favorites}
+        <PrivateRoute
+          path={AppRoute.Favorites}
           exact
-          render={()=><Favorites  offers={offers}/>}
+          render={() => <Favorites offers={offers} />}
           authorizationStatus={AuthorizationStatus.Auth}
         />
         <Route path={AppRoute.Room} exact>
-          <Room
-            offers={offers}
-            active = {active}
-            setActive = {setActive}
-          />
+          <Room  active={active} setActive={setActive} />
         </Route>
-        < Route render={Error} />
+        <Route render={Error} />
       </Switch>
     </BrowserRouter>
   );

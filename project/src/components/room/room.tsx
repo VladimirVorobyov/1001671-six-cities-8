@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router';
-import {OffersType} from '../../types/offers-type';
+import offers from '../../mocks/offers';
 import Card from '../card/card';
 import Comment from '../comment/comment';
 import Error from '../error/error';
@@ -11,12 +11,11 @@ import FullImgRoom from './full-img-room';
 import InsideList from './inside-list';
 import Map from '../map/map';
 type RoomProps = {
-  offers:OffersType,
   setActive:(a:string)=>void,
   active:string,
 }
 
-function Room ({offers,setActive,active}:RoomProps): JSX.Element {
+function Room ({setActive,active}:RoomProps): JSX.Element {
   const [form, setForm] = useState({
     rating:'',
     discription:'',
