@@ -9,6 +9,7 @@ const initialState = {
   cities: mapMock,
   offers: offers.filter((item) => item.city === 'Paris'),
   map: CITY_PARIS,
+  active:'',
 };
 
 const cityReducer = (state: State = initialState, action: Actions): State => {
@@ -44,6 +45,11 @@ const cityReducer = (state: State = initialState, action: Actions): State => {
       return {
         ...state,
         offers: action.payload.sort((a, b) => b.rating - a.rating),
+      };
+    case ActionType.ActiveCard:
+      return{
+        ...state,
+        active: action.payload,
       };
     default:
       return state;

@@ -1,10 +1,9 @@
 import { OfferType } from '../../types/offers-type';
 import { Link } from 'react-router-dom';
-
+import { useDispatch } from 'react-redux';
+import {ActiveCard} from '../../store/action';
 type CardScreenProps = {
   item: OfferType;
-  setActive: (id: string) => void;
-  active: string;
 };
 const style = {
   svg: {
@@ -15,11 +14,12 @@ const style = {
   },
 };
 
-function Card({ item, active, setActive }: CardScreenProps): JSX.Element {
+function Card({ item}: CardScreenProps): JSX.Element {
+  const dispatch = useDispatch();
   return (
     <article
       className="cities__place-card place-card"
-      onMouseOver={() => setActive(item.id)}
+      onMouseOver={() => dispatch(ActiveCard(item.id))}
     >
       {item.premium && (
         <div className="place-card__mark">

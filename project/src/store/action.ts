@@ -4,9 +4,15 @@ import {
   CityActionType,
   LowToHighActionType,
   HighToLowActionType,
-  TopRatedActionType
+  TopRatedActionType,
+  ActiveCardType
 } from '../types/ActionType';
 import { OffersType } from '../types/offers-type';
+
+export const ActiveCard = (payload: string): ActiveCardType => ({
+  type: ActionType.ActiveCard,
+  payload,
+});
 
 export const MapAction = (payload: string): MapActionType => ({
   type: ActionType.MapAction,

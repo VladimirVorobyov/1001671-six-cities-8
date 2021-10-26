@@ -3,12 +3,10 @@ import { OffersType } from '../../types/offers-type';
 import CardsList from '../cards-list/cards-list';
 import Cities from '../cities/cities';
 type MainProps = {
-  setActive: (a: string) => void;
-  active: string;
   offersActive: OffersType;
 };
 
-function Main({setActive, active,offersActive }: MainProps): JSX.Element {
+function Main({offersActive}: MainProps): JSX.Element {
   return (
     <>
       <div style={{ display: 'none' }}>
@@ -67,8 +65,6 @@ function Main({setActive, active,offersActive }: MainProps): JSX.Element {
         <main className="page__main page__main--index">
           <Cities />
           <CardsList
-            active={active}
-            setActive={setActive}
             offersActive={offersActive}
           />
         </main>

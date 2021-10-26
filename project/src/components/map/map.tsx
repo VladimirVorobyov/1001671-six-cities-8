@@ -5,11 +5,11 @@ import imgActive from '../../img/pin-active.svg';
 import 'leaflet/dist/leaflet.css';
 import { Icon, Marker } from 'leaflet';
 import { OffersType } from '../../types/offers-type';
+import { useTypeSelector } from '../../hooks/useTypeSelector';
 
 
 type MapPropsType = {
   offers: OffersType;
-  active: string;
 };
 const defaultCustomIcon = new Icon({
   iconUrl: imgGeneral,
@@ -23,7 +23,8 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40],
 });
 
-function Map({ offers, active }: MapPropsType): JSX.Element {
+function Map({ offers }: MapPropsType): JSX.Element {
+  const active = useTypeSelector((state)=>state.active);
   const mapRef = useRef(null);
   const map = useMap(mapRef);
 

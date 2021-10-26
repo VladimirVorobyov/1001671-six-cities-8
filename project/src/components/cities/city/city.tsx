@@ -1,5 +1,4 @@
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import {MapAction,CityAction} from '../../../store/action';
 import {MapType} from '../../../types/offers-type';
 
@@ -17,7 +16,7 @@ function City({ city}: CityType): JSX.Element {
 
   return (
     <li className="locations__item">
-      <Link to={`/${city.city}`}
+      <span
         className={classList.join(' ')}
         onClick={() =>{
           dispatch(MapAction(city.city));
@@ -25,7 +24,7 @@ function City({ city}: CityType): JSX.Element {
         }}
       >
         <span>{city.city}</span>
-      </Link>
+      </span>
     </li>
   );
 }

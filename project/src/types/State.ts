@@ -4,4 +4,5 @@ export type State = {
   cities: MapsType;
   offers: OffersType;
   map: MapType | undefined;
+  active:string,
 };

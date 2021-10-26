@@ -27,6 +27,9 @@ function useMap(mapRef:MutableRefObject<HTMLElement | null>): Map | null {
 
       setMap(instance);
     }
+    if(map && city){
+      map.setView(city, city.zoom);
+    }
   }, [mapRef, map, city]);
 
   return map;

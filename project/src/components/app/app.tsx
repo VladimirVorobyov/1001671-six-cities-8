@@ -7,11 +7,11 @@ import Room from '../room/room';
 import {AppRoute,AuthorizationStatus} from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import offers from '../../mocks/offers';
-import { useState } from 'react';
 import {useTypeSelector} from '../../hooks/useTypeSelector';
 
+
 function App(): JSX.Element {
-  const [active, setActive] = useState('');
+
   const offersActive = useTypeSelector((state) => state.offers);
   return (
     <BrowserRouter>
@@ -19,8 +19,6 @@ function App(): JSX.Element {
         <Route path={AppRoute.Main} exact>
           <Main
             offersActive={offersActive}
-            active={active}
-            setActive={setActive}
           />
         </Route>
         <Route path={AppRoute.SignIn} exact>
@@ -33,7 +31,7 @@ function App(): JSX.Element {
           authorizationStatus={AuthorizationStatus.Auth}
         />
         <Route path={AppRoute.Room} exact>
-          <Room  active={active} setActive={setActive} />
+          <Room/>
         </Route>
         <Route render={Error} />
       </Switch>

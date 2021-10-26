@@ -10,12 +10,8 @@ import DescriptionRoom from './description-room';
 import FullImgRoom from './full-img-room';
 import InsideList from './inside-list';
 import Map from '../map/map';
-type RoomProps = {
-  setActive:(a:string)=>void,
-  active:string,
-}
 
-function Room ({setActive,active}:RoomProps): JSX.Element {
+function Room (): JSX.Element {
   const [form, setForm] = useState({
     rating:'',
     discription:'',
@@ -135,7 +131,7 @@ function Room ({setActive,active}:RoomProps): JSX.Element {
               </div>
             </div>
             <section className="property__map map">
-              <Map offers={cards} active={active}/>
+              <Map offers={cards}/>
             </section>
           </section>
           <div className="container">
@@ -143,7 +139,7 @@ function Room ({setActive,active}:RoomProps): JSX.Element {
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
                 {cards.map((item)=>
-                  <Card key={item.id} item={item} active={active} setActive={setActive} />)}
+                  <Card key={item.id} item={item}/>)}
               </div>
             </section>
           </div>

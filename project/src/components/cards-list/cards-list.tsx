@@ -4,14 +4,10 @@ import Map from '../map/map';
 import SortOptions from '../sort-options/sort-options';
 import { useTypeSelector } from '../../hooks/useTypeSelector';
 type ListProps = {
-  setActive: (a: string) => void;
-  active: string;
   offersActive: OffersType;
 };
 
 function CardsList({
-  setActive,
-  active,
   offersActive,
 }: ListProps): JSX.Element {
   const mapState = useTypeSelector((state) => state.map);
@@ -31,15 +27,13 @@ function CardsList({
               <Card
                 key={item.id}
                 item={item}
-                active={active}
-                setActive={setActive}
               />
             ))}
           </div>
         </section>
         <div className="cities__right-section">
           <section className="cities__map map">
-            <Map offers={offersActive} active={active} />
+            <Map offers={offersActive}/>
           </section>
         </div>
       </div>

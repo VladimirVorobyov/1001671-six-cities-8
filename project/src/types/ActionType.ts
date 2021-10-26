@@ -6,7 +6,12 @@ export enum ActionType {
   LowToHigh = 'Price: low to high',
   HighToLow = 'Price: high to low',
   TopRated = 'Top rated first',
+  ActiveCard = 'Active Card'
 }
+export type ActiveCardType = {
+  type: ActionType.ActiveCard;
+  payload: string;
+};
 
 export type MapActionType = {
   type: ActionType.MapAction;
@@ -38,4 +43,5 @@ export type Actions =
   | CityActionType
   | LowToHighActionType
   | HighToLowActionType
-  | TopRatedActionType;
+  | TopRatedActionType
+  | ActiveCardType;
