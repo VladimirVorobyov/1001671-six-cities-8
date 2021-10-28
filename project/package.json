@@ -23,7 +23,9 @@
     "eslint": "eslint --ext .tsx --ext .ts src/"
   },
   "eslintConfig": {
-    "plugins": ["prettier"],
+    "plugins": [
+      "prettier"
+    ],
     "extends": [
       "react-app",
       "react-app/jest",

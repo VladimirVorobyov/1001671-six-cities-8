@@ -18,7 +18,7 @@ function CardsList({
           <h2 className="visually-hidden">Places</h2>
           {mapState && (
             <b className="places__found">
-              {mapState.countOffer} places to stay in {mapState.city}
+              {offersActive.length} places to stay in {mapState.city}
             </b>
           )}
           <SortOptions offersActive={offersActive} />
