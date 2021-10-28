@@ -25,11 +25,16 @@ export type OfferType = {
   nameBoss: string,
   imgBoss: string,
   comments : CommentOfferType[],
-  cost: string,
+  cost: number,
   favorites:boolean,
   lat:number,
   lng: number,
 };
 
 export type OffersType = OfferType[];
-export type MapType = Pick<OfferType, 'city' | 'lat' |'lng'> & {zoom: number};
+export type MapType = Pick<OfferType, 'city' | 'lat' | 'lng'> & {
+  zoom: number;
+  active: boolean;
+  countOffer: number;
+};
+export type MapsType = MapType[];

@@ -1,14 +1,12 @@
 import Logo from '../logo/logo';
 import { OffersType } from '../../types/offers-type';
 import CardsList from '../cards-list/cards-list';
+import Cities from '../cities/cities';
 type MainProps = {
-  counter: number;
-  offers: OffersType;
-  setActive: (a: string) => void;
-  active: string;
+  offersActive: OffersType;
 };
 
-function Main({ counter, offers, setActive, active }: MainProps): JSX.Element {
+function Main({offersActive}: MainProps): JSX.Element {
   return (
     <>
       <div style={{ display: 'none' }}>
@@ -65,51 +63,9 @@ function Main({ counter, offers, setActive, active }: MainProps): JSX.Element {
         </header>
 
         <main className="page__main page__main--index">
-          <h1 className="visually-hidden">Cities</h1>
-          <div className="tabs">
-            <section className="locations container">
-              <ul className="locations__list tabs__list">
-                <li className="locations__item">
-                  <a href="/" className="locations__item-link tabs__item">
-                    <span>Paris</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a href="/" className="locations__item-link tabs__item">
-                    <span>Cologne</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a href="/" className="locations__item-link tabs__item">
-                    <span>Brussels</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a
-                    href="/"
-                    className="locations__item-link tabs__item tabs__item--active"
-                  >
-                    <span>Amsterdam</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a href="/" className="locations__item-link tabs__item">
-                    <span>Hamburg</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a href="/" className="locations__item-link tabs__item">
-                    <span>Dusseldorf</span>
-                  </a>
-                </li>
-              </ul>
-            </section>
-          </div>
+          <Cities />
           <CardsList
-            offers={offers}
-            counter={counter}
-            active={active}
-            setActive={setActive}
+            offersActive={offersActive}
           />
         </main>
       </div>

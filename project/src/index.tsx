@@ -1,16 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
-import offers from './mocks/offers';
-
-const propsMain= {
-  offers: 351,
-};
+import { Provider } from 'react-redux';
+import store from './store/index';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App offers={offers}
-      counter={propsMain.offers}
-    />
+    <Provider store={store}>
+      <App/>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root'));
