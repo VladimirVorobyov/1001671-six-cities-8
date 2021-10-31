@@ -3,9 +3,9 @@ import { MapsType} from '../types/offers-type';
 const mapMock: MapsType = [
   {
     city: 'Paris',
-    lat: 48.7912,
-    lng: 2.4055,
-    zoom: 10,
+    lat: 48.8512,
+    lng: 2.3455,
+    zoom: 12,
     active: true,
   },
   {

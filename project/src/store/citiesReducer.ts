@@ -2,8 +2,6 @@ import { AuthorizationStatus } from './../const';
 import { Actions, ActionType } from './../types/ActionType';
 import { State } from '../types/State';
 import mapMock from '../mocks/map';
-// import offers from '../mocks/offers';
-
 const CITY_PARIS = mapMock[0];
 
 const initialState = {
