@@ -7,7 +7,7 @@ type FavoritesProps = {
 }
 
 function Favorites ({offers}:FavoritesProps): JSX.Element {
-  const offresFavorites:OffersType = offers.filter((el)=>el.favorites);
+  const offresFavorites: OffersType = offers.filter((el) => el.is_favorite);
   return (
     <>
       <div style={{display: 'none'}}>

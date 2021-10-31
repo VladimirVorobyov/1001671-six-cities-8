@@ -1,5 +1,5 @@
 export enum AppRoute {
-  Main = '/:city?',
+  Main = '/',
   SignIn = '/login',
   Favorites = '/favorites',
   Room = '/offer/:id?',
@@ -9,4 +9,10 @@ export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
+}
+
+export enum APIRoute {
+  Offers = '/hotels',
+  Login = '/login',
+  Logout = '/logout',
 }

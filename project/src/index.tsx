@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom';
 import App from './components/app/app';
 import { Provider } from 'react-redux';
 import store from './store/index';
+import {ThunkAppDispatch} from './types/ActionType';
+import { fetchOffersnAction, checkAuthAction } from './store/api-action';
+
+(store.dispatch as ThunkAppDispatch)(checkAuthAction());
+(store.dispatch as ThunkAppDispatch)(fetchOffersnAction());
 
 ReactDOM.render(
   <React.StrictMode>

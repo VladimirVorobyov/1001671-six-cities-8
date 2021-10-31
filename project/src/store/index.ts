@@ -2,7 +2,16 @@ import { applyMiddleware, createStore} from 'redux';
 import thunk from 'redux-thunk';
 import cityReducer from './citiesReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import {createAPI} from '../services/api';
+import { requireAuthorization } from './action';
+import {AuthorizationStatus} from '../const';
 
-const store = createStore(cityReducer,composeWithDevTools(applyMiddleware(thunk)));
+const api = createAPI(() =>store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth)));
+
+const store = createStore(
+  cityReducer,
+  composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api))),
+);
+
 
 export default store;

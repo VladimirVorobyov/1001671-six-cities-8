@@ -1,15 +1,19 @@
+import { AuthorizationStatus } from './../const';
 import { Actions, ActionType } from './../types/ActionType';
 import { State } from '../types/State';
 import mapMock from '../mocks/map';
-import offers from '../mocks/offers';
+// import offers from '../mocks/offers';
 
 const CITY_PARIS = mapMock[0];
 
 const initialState = {
+  offersLoad: [],
   cities: mapMock,
-  offers: offers.filter((item) => item.city === 'Paris'),
+  offers:[],
   map: CITY_PARIS,
-  active:'',
+  active: 0,
+  authorizationStatus: AuthorizationStatus.Unknown,
+  isDataLoaded: false,
 };
 
 const cityReducer = (state: State = initialState, action: Actions): State => {
@@ -24,7 +28,7 @@ const cityReducer = (state: State = initialState, action: Actions): State => {
           }
           return item;
         }),
-        offers: offers.filter((item) => item.city === action.payload),
+        offers: state.offersLoad && [...state.offersLoad].filter((item) => item.city.name === action.payload),
       };
     case ActionType.MapAction:
       return {
@@ -34,12 +38,12 @@ const cityReducer = (state: State = initialState, action: Actions): State => {
     case ActionType.LowToHigh:
       return {
         ...state,
-        offers: [...action.payload].sort((a, b) => a.cost - b.cost),
+        offers: [...action.payload].sort((a, b) => a.price - b.price),
       };
     case ActionType.HighToLow:
       return {
         ...state,
-        offers: [...action.payload].sort((a, b) => b.cost - a.cost),
+        offers: [...action.payload].sort((a, b) => b.price - a.price),
       };
     case ActionType.TopRated:
       return {
@@ -47,9 +51,25 @@ const cityReducer = (state: State = initialState, action: Actions): State => {
         offers: [...action.payload].sort((a, b) => b.rating - a.rating),
       };
     case ActionType.ActiveCard:
-      return{
+      return {
         ...state,
         active: action.payload,
+      };
+    case ActionType.RequireAuthorization:
+      return {
+        ...state,
+        authorizationStatus: action.payload,
+        isDataLoaded: true,
+      };
+    case ActionType.RequireLogout:
+      return { ...state, authorizationStatus: AuthorizationStatus.NoAuth };
+    case ActionType.LoadOffers:
+      return {
+        ...state,
+        offersLoad: action.payload,
+        offers: [...action.payload].filter(
+          (item) => item.city.name === 'Paris',
+        ),
       };
     default:
       return state;

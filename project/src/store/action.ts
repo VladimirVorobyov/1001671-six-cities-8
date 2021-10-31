@@ -5,11 +5,31 @@ import {
   LowToHighActionType,
   HighToLowActionType,
   TopRatedActionType,
-  ActiveCardType
+  ActiveCardType,
+  AuthorizationType,
+  LogoutType,
+  LoadOffersType
 } from '../types/ActionType';
 import { OffersType } from '../types/offers-type';
+import { AuthorizationStatus } from '../const';
 
-export const ActiveCard = (payload: string): ActiveCardType => ({
+export const LoadOffers = (payload: OffersType): LoadOffersType => ({
+  type: ActionType.LoadOffers,
+  payload,
+});
+
+export const requireAuthorization = (
+  payload: AuthorizationStatus,
+): AuthorizationType => ({
+  type: ActionType.RequireAuthorization,
+  payload,
+});
+
+export const requireLogout = (): LogoutType => ({
+  type: ActionType.RequireLogout,
+});
+
+export const ActiveCard = (payload: number): ActiveCardType => ({
   type: ActionType.ActiveCard,
   payload,
 });

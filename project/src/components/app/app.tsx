@@ -8,11 +8,19 @@ import {AppRoute,AuthorizationStatus} from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import offers from '../../mocks/offers';
 import {useTypeSelector} from '../../hooks/useTypeSelector';
+import Loading from '../loading/loading';
 
 
 function App(): JSX.Element {
 
   const offersActive = useTypeSelector((state) => state.offers);
+  const authorizationStatus = useTypeSelector(
+    (state) => state.authorizationStatus,
+  );
+  const isDataLoaded = useTypeSelector((state) => state.isDataLoaded);
+  if (AuthorizationStatus.Unknown === authorizationStatus || !isDataLoaded) {
+    return <Loading/>;
+  }
   return (
     <BrowserRouter>
       <Switch>
