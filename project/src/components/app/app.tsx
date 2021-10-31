@@ -6,7 +6,6 @@ import Favorites from '../favorites/favorites';
 import Room from '../room/room';
 import {AppRoute,AuthorizationStatus} from '../../const';
 import PrivateRoute from '../private-route/private-route';
-import offers from '../../mocks/offers';
 import {useTypeSelector} from '../../hooks/useTypeSelector';
 import Loading from '../loading/loading';
 
@@ -35,7 +34,7 @@ function App(): JSX.Element {
         <PrivateRoute
           path={AppRoute.Favorites}
           exact
-          render={() => <Favorites offers={offers} />}
+          render={() => <Favorites/>}
           authorizationStatus={AuthorizationStatus.Auth}
         />
         <Route path={AppRoute.Room} exact>

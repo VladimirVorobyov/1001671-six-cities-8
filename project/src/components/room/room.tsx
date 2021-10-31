@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useParams } from 'react-router';
-import offers from '../../mocks/offers';
 import Card from '../card/card';
 import Comment from '../comment/comment';
 import Error from '../error/error';
@@ -11,6 +10,7 @@ import FullImgRoom from './full-img-room';
 import InsideList from './inside-list';
 import Map from '../map/map';
 import comments from '../../mocks/comments';
+import { useTypeSelector } from '../../hooks/useTypeSelector';
 
 function Room (): JSX.Element {
   const [form, setForm] = useState({
@@ -20,9 +20,10 @@ function Room (): JSX.Element {
   type IdParams = {
     id: string;
   }
+  const offers = useTypeSelector((state)=>state.offers);
   const {id}:IdParams = useParams();
-  const offer = offers.find((item)=>item.id === +id);
-  const cards = offers.filter((item)=>item.id !== +id);
+  const offer = offers.find((item) => item.id === +id);
+  const cards = offers.filter((item) => item.id !== +id);
 
   return id && offer && cards ? (
     <>
