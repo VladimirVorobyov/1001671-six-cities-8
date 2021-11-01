@@ -1,17 +1,14 @@
-import Logo from '../logo/logo';
 import { ClientOffersType } from '../../types/offers-type';
 import CardsList from '../cards-list/cards-list';
 import Cities from '../cities/cities';
-import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
-import { useDispatch } from 'react-redux';
-import {logoutAction} from '../../store/api-action';
+import Header from '../header/header';
+
 type MainProps = {
   offersActive: ClientOffersType;
 };
 
 function Main({offersActive}: MainProps): JSX.Element {
-  const dispatch = useDispatch();
+
   return (
     <>
       <div style={{ display: 'none' }}>
@@ -39,41 +36,7 @@ function Main({offersActive}: MainProps): JSX.Element {
       </div>
 
       <div className="page page--gray page--main">
-        <header className="header">
-          <div className="container">
-            <div className="header__wrapper">
-              <Logo />
-              <nav className="header__nav">
-                <ul className="header__nav-list">
-                  <li className="header__nav-item user">
-                    <Link
-                      to={AppRoute.Favorites}
-                      className="header__nav-link header__nav-link--profile"
-                    >
-                      <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                      <span className="header__user-name user__name">
-                        Oliver.conner@gmail.com
-                      </span>
-                    </Link>
-                  </li>
-                  <li className="header__nav-item">
-                    <Link
-                      to="/"
-                      className="header__nav-link"
-                      onClick={(evt) => {
-                        evt.preventDefault();
-
-                        dispatch(logoutAction());
-                      }}
-                    >
-                      <span className="header__signout">Sign out</span>
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </header>
+        <Header/>
 
         <main className="page__main page__main--index">
           <Cities />
