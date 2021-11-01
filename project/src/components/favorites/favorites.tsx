@@ -1,11 +1,13 @@
 import Logo from '../logo/logo';
 import FavoritesCard from '../favorites-card/favorites-card';
-import {OffersType} from '../../types/offers-type';
+import { ClientOffersType } from '../../types/offers-type';
 import { useTypeSelector } from '../../hooks/useTypeSelector';
 
 function Favorites (): JSX.Element {
   const offers = useTypeSelector(((state)=>state.offers));
-  const offresFavorites: OffersType = offers.filter((el) => el.is_favorite);
+  const offresFavorites: ClientOffersType = offers.filter(
+    (el) => el.isFavorite,
+  );
   return (
     <>
       <div style={{display: 'none'}}>

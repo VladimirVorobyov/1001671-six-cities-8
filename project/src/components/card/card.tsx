@@ -1,9 +1,9 @@
-import { OfferType } from '../../types/offers-type';
+import { ClientOfferType } from '../../types/offers-type';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {ActiveCard} from '../../store/action';
 type CardScreenProps = {
-  item: OfferType;
+  item: ClientOfferType;
 };
 const style = {
   svg: {
@@ -21,7 +21,7 @@ function Card({ item}: CardScreenProps): JSX.Element {
       className="cities__place-card place-card"
       onMouseOver={() => dispatch(ActiveCard(item.id))}
     >
-      {item.is_premium && (
+      {item.isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
@@ -30,7 +30,7 @@ function Card({ item}: CardScreenProps): JSX.Element {
         <a href="/">
           <img
             className="place-card__image"
-            src={item.preview_image}
+            src={item.previewImage}
             width="260"
             height="200"
             alt="Place"
@@ -45,7 +45,7 @@ function Card({ item}: CardScreenProps): JSX.Element {
           </div>
           <button className="place-card__bookmark-button button" type="button">
             <svg
-              style={item.is_favorite ? style.svg : style.svgN}
+              style={item.isFavorite ? style.svg : style.svgN}
               className="place-card__bookmark-icon"
               width="18"
               height="19"

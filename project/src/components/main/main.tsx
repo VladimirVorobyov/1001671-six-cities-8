@@ -1,12 +1,17 @@
 import Logo from '../logo/logo';
-import { OffersType } from '../../types/offers-type';
+import { ClientOffersType } from '../../types/offers-type';
 import CardsList from '../cards-list/cards-list';
 import Cities from '../cities/cities';
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
+import { useDispatch } from 'react-redux';
+import {logoutAction} from '../../store/api-action';
 type MainProps = {
-  offersActive: OffersType;
+  offersActive: ClientOffersType;
 };
 
 function Main({offersActive}: MainProps): JSX.Element {
+  const dispatch = useDispatch();
   return (
     <>
       <div style={{ display: 'none' }}>
@@ -41,20 +46,28 @@ function Main({offersActive}: MainProps): JSX.Element {
               <nav className="header__nav">
                 <ul className="header__nav-list">
                   <li className="header__nav-item user">
-                    <a
-                      href="/"
+                    <Link
+                      to={AppRoute.Favorites}
                       className="header__nav-link header__nav-link--profile"
                     >
                       <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                       <span className="header__user-name user__name">
                         Oliver.conner@gmail.com
                       </span>
-                    </a>
+                    </Link>
                   </li>
                   <li className="header__nav-item">
-                    <a href="/" className="header__nav-link">
+                    <Link
+                      to="/"
+                      className="header__nav-link"
+                      onClick={(evt) => {
+                        evt.preventDefault();
+
+                        dispatch(logoutAction());
+                      }}
+                    >
                       <span className="header__signout">Sign out</span>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </nav>
@@ -64,9 +77,7 @@ function Main({offersActive}: MainProps): JSX.Element {
 
         <main className="page__main page__main--index">
           <Cities />
-          <CardsList
-            offersActive={offersActive}
-          />
+          <CardsList offersActive={offersActive} />
         </main>
       </div>
     </>

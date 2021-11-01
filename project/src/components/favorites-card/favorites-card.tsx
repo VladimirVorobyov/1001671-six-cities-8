@@ -1,8 +1,8 @@
-import { OfferType } from '../../types/offers-type';
+import { ClientOfferType } from '../../types/offers-type';
 
 type CardProps = {
-  card:OfferType
-}
+  card: ClientOfferType;
+};
 
 function FavoritesCard ({card}:CardProps): JSX.Element{
   return (
@@ -11,7 +11,7 @@ function FavoritesCard ({card}:CardProps): JSX.Element{
         <a href="/">
           <img
             className="place-card__image"
-            src={card.preview_image}
+            src={card.previewImage}
             width="150"
             height="110"
             alt="Place"

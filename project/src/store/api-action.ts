@@ -1,15 +1,39 @@
-import { LoadOffers, requireAuthorization, requireLogout } from './action';
-import { OffersType } from './../types/offers-type';
+import { LoadOffers, requireAuthorization, requireLogout,redirectToRoute } from './action';
+import { OffersType, ClientOffersType } from './../types/offers-type';
 import {ThunkActionResult} from '../types/ActionType';
-import { APIRoute, AuthorizationStatus } from '../const';
+import { APIRoute, AuthorizationStatus, AppRoute } from '../const';
 import {AuthData} from '../types/auth-data';
 import { Token, saveToken, dropToken } from '../services/token';
+
+const adapterOfffers = (offers: OffersType): ClientOffersType => offers.map((item) => ({
+  id: item.id,
+  city: item.city,
+  previewImage: item.preview_image,
+  images: item.images,
+  title: item.title,
+  isFavorite: item.is_favorite,
+  isPremium: item.is_premium,
+  rating: item.rating,
+  type: item.type,
+  bedrooms: item.bedrooms,
+  maxAdults: item.max_adults,
+  price: item.price,
+  goods: item.goods,
+  description: item.description,
+  location: item.location,
+  host: {
+    id: item.host.id,
+    name: item.host.name,
+    pro: item.host.is_pro,
+    avatar: item.host.avatar_url,
+  },
+}));
 
 export const fetchOffersnAction =
   (): ThunkActionResult =>
     async (dispatch, _getState, api): Promise<void> => {
       const { data } = await api.get<OffersType>(APIRoute.Offers);
-      dispatch(LoadOffers(data));
+      dispatch(LoadOffers(adapterOfffers(data)));
     };
 
 
@@ -31,6 +55,7 @@ export const loginAction =
           });
           saveToken(token);
           dispatch(requireAuthorization(AuthorizationStatus.Auth));
+          dispatch(redirectToRoute(AppRoute.Favorites));
         };
 
 export const logoutAction =

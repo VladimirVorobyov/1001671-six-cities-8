@@ -14,6 +14,12 @@ type Host = {
   'is_pro': boolean,
   'avatar_url': string,
 }
+type HostClient = {
+  id: number;
+  name: string;
+  pro: boolean;
+  avatar: string;
+};
 
 
 export type CommentOfferType = {
@@ -26,6 +32,25 @@ export type CommentOfferType = {
 }
 
 export type CommentsOfferType = CommentOfferType[];
+
+export type ClientOfferType = {
+  id: number;
+  city: City;
+  previewImage: string;
+  images: string[];
+  title: string;
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
+  type: string;
+  bedrooms: number;
+  maxAdults: number;
+  price: number;
+  goods: string[];
+  description: string;
+  location: Locaction;
+  host: HostClient;
+};
 
 export type OfferType = {
   id: number,
@@ -46,6 +71,7 @@ export type OfferType = {
   host: Host,
 };
 export type OffersType = OfferType[];
+export type ClientOffersType = ClientOfferType[];
 export type MapType = {
   city: string;
   lat: number;

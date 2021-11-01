@@ -1,12 +1,12 @@
 import { AuthorizationStatus } from './../const';
-import {OffersType,MapsType,MapType} from '../types/offers-type';
+import { ClientOffersType, MapsType, MapType } from '../types/offers-type';
 
 export type State = {
   cities: MapsType;
-  offers: OffersType;
+  offers: ClientOffersType;
   map: MapType | undefined;
   active: number;
   authorizationStatus: AuthorizationStatus;
-  offersLoad: OffersType;
+  offersLoad: ClientOffersType;
   isDataLoaded: boolean;
 };

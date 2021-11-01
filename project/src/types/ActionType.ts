@@ -1,8 +1,9 @@
 import { AuthorizationStatus } from './../const';
-import { OffersType } from '../types/offers-type';
+import { ClientOffersType } from '../types/offers-type';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { AxiosInstance } from 'axios';
 import { State } from './State';
+import { AppRoute } from './../const';
 
 export enum ActionType {
   MapAction = 'MapAction',
@@ -14,11 +15,17 @@ export enum ActionType {
   RequireAuthorization = 'user/requireAuthorization',
   RequireLogout = 'user/requireLogout',
   LoadOffers = 'data/loadOffers',
+  RedirectToRoute = 'redirectToRoute',
 }
+
+export type RedirectToRouteType = {
+  type: ActionType.RedirectToRoute;
+  payload: AppRoute;
+};
 
 export type LoadOffersType = {
   type: ActionType.LoadOffers;
-  payload: OffersType;
+  payload: ClientOffersType;
 };
 
 export type ActiveCardType = {
@@ -38,17 +45,17 @@ export type CityActionType = {
 
 export type LowToHighActionType = {
   type: ActionType.LowToHigh;
-  payload: OffersType;
+  payload: ClientOffersType;
 };
 
 export type HighToLowActionType = {
   type: ActionType.HighToLow;
-  payload: OffersType;
+  payload: ClientOffersType;
 };
 
 export type TopRatedActionType = {
   type: ActionType.TopRated;
-  payload: OffersType;
+  payload: ClientOffersType;
 };
 
 export type AuthorizationType = {
@@ -70,7 +77,8 @@ export type Actions =
   | ActiveCardType
   | AuthorizationType
   | LogoutType
-  | LoadOffersType;
+  | LoadOffersType
+  | RedirectToRouteType;
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<
     R,

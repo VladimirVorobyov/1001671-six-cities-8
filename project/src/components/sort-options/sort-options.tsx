@@ -1,12 +1,12 @@
 import { useDispatch } from 'react-redux';
-import { OffersType } from '../../types/offers-type';
+import { ClientOffersType } from '../../types/offers-type';
 import {
   LowToHighAction,
   HighToLowAction,
   TopRatedAction
 } from '../../store/action';
 type SortProps = {
-  offersActive: OffersType;
+  offersActive: ClientOffersType;
 };
 
 function SortOptions({ offersActive }: SortProps): JSX.Element {

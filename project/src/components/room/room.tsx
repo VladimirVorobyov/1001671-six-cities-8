@@ -90,7 +90,7 @@ function Room (): JSX.Element {
             </div>
             <div className="property__container container">
               <div className="property__wrapper">
-                {offer?.is_premium && (
+                {offer?.isPremium && (
                   <div className="place-card__mark">
                     <span>Premium</span>
                   </div>
@@ -128,7 +128,7 @@ function Room (): JSX.Element {
                     {offer.bedrooms}
                   </li>
                   <li className="property__feature property__feature--adults">
-                    {offer.max_adults}
+                    {offer.maxAdults}
                   </li>
                 </ul>
                 <div className="property__price">
@@ -149,7 +149,7 @@ function Room (): JSX.Element {
                     <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
                       <img
                         className="property__avatar user__avatar"
-                        src={offer.host.avatar_url}
+                        src={offer.host.avatar}
                         width="74"
                         height="74"
                         alt="Host avatar"
@@ -158,7 +158,7 @@ function Room (): JSX.Element {
                     <span className="property__user-name">
                       {offer.host.name}
                     </span>
-                    {offer.host.is_pro && (
+                    {offer.host.pro && (
                       <span className="property__user-status">Pro</span>
                     )}
                   </div>

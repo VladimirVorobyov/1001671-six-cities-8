@@ -1,10 +1,10 @@
-import { OffersType } from '../../types/offers-type';
+import { ClientOffersType } from '../../types/offers-type';
 import Card from '../card/card';
 import Map from '../map/map';
 import SortOptions from '../sort-options/sort-options';
 import { useTypeSelector } from '../../hooks/useTypeSelector';
 type ListProps = {
-  offersActive: OffersType;
+  offersActive: ClientOffersType;
 };
 
 function CardsList({
