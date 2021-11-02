@@ -1,3 +1,4 @@
+import React from 'react';
 import { ClientOfferType } from '../../types/offers-type';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -70,4 +71,4 @@ function Card({ item}: CardScreenProps): JSX.Element {
   );
 }
 
-export default Card;
+export default React.memo(Card,(prevProps,nextProps)=>prevProps.item === nextProps.item);

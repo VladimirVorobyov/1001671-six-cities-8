@@ -1,3 +1,4 @@
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { ClientOffersType } from '../../types/offers-type';
 import {
@@ -50,4 +51,4 @@ function SortOptions({ offersActive }: SortProps): JSX.Element {
   );
 }
 
-export default SortOptions;
+export default React.memo(SortOptions);

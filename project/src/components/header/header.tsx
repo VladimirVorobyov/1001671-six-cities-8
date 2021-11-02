@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { logoutAction } from '../../store/api-action';
 import { useDispatch } from 'react-redux';
+import React from 'react';
 
-export default function Header(): JSX.Element {
+function Header(): JSX.Element {
   const dispatch = useDispatch();
   return(
     <header className="header">
@@ -44,3 +45,4 @@ export default function Header(): JSX.Element {
   );
 }
 
+export default React.memo(Header);

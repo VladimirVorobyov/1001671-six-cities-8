@@ -1,6 +1,6 @@
 import Logo from '../logo/logo';
 import { useDispatch } from 'react-redux';
-import { useRef, FormEvent } from 'react';
+import { useRef, FormEvent,memo, useCallback } from 'react';
 import { loginAction } from '../../store/api-action';
 
 function Login (): JSX.Element {
@@ -9,16 +9,19 @@ function Login (): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
-  const onSubmit = (evt: FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
-    if (loginRef.current !== null && passwordRef.current !== null) {
-      const authData = {
-        login: loginRef.current.value,
-        password: passwordRef.current.value,
-      };
-      dispatch(loginAction(authData));
-    }
-  };
+  const onSubmit = useCallback(
+    (evt: FormEvent<HTMLFormElement>) => {
+      evt.preventDefault();
+      if (loginRef.current !== null && passwordRef.current !== null) {
+        const authData = {
+          login: loginRef.current.value,
+          password: passwordRef.current.value,
+        };
+        dispatch(loginAction(authData));
+      }
+    },
+    [dispatch],
+  );
   return (
     <>
       <div style={{ display: 'none' }}>
@@ -95,9 +98,6 @@ function Login (): JSX.Element {
             </section>
             <section className="locations locations--login locations--current">
               <div className="locations__item">
-                <a href="/" className="locations__item-link">
-                  <span>Amsterdam</span>
-                </a>
               </div>
             </section>
           </div>
@@ -107,4 +107,4 @@ function Login (): JSX.Element {
   );
 }
 
-export default Login;
+export default memo(Login);

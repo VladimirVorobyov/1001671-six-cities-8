@@ -1,8 +1,11 @@
 import './loading.css';
+import React from 'react';
 
-export default function Loading (): JSX.Element{
+function Loading (): JSX.Element{
   return (
     <div id="page-preloader" style={{background: 'red'}}>
       <span className="spinner"></span>
     </div>
   );}
+
+export default React.memo(Loading);

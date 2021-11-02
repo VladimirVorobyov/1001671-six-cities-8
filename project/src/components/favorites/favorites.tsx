@@ -4,7 +4,7 @@ import { useTypeSelector } from '../../hooks/useTypeSelector';
 import Header from '../header/header';
 
 function Favorites (): JSX.Element {
-  const offers = useTypeSelector(((state)=>state.offers));
+  const offers = useTypeSelector(((state)=>state.offersLoad));
   const offresFavorites: ClientOffersType = offers.filter(
     (el) => el.isFavorite,
   );
