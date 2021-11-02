@@ -5,11 +5,37 @@ import {
   LowToHighActionType,
   HighToLowActionType,
   TopRatedActionType,
-  ActiveCardType
+  ActiveCardType,
+  AuthorizationType,
+  LogoutType,
+  LoadOffersType,
+  RedirectToRouteType
 } from '../types/ActionType';
-import { OffersType } from '../types/offers-type';
+import { ClientOffersType } from '../types/offers-type';
+import { AuthorizationStatus, AppRoute } from '../const';
 
-export const ActiveCard = (payload: string): ActiveCardType => ({
+export const redirectToRoute = (payload: AppRoute): RedirectToRouteType => ({
+  type: ActionType.RedirectToRoute,
+  payload,
+});
+
+export const LoadOffers = (payload: ClientOffersType): LoadOffersType => ({
+  type: ActionType.LoadOffers,
+  payload,
+});
+
+export const requireAuthorization = (
+  payload: AuthorizationStatus,
+): AuthorizationType => ({
+  type: ActionType.RequireAuthorization,
+  payload,
+});
+
+export const requireLogout = (): LogoutType => ({
+  type: ActionType.RequireLogout,
+});
+
+export const ActiveCard = (payload: number): ActiveCardType => ({
   type: ActionType.ActiveCard,
   payload,
 });
@@ -24,17 +50,17 @@ export const CityAction = (payload: string): CityActionType => ({
   payload,
 });
 
-export const LowToHighAction = (payload: OffersType): LowToHighActionType => ({
+export const LowToHighAction = (payload: ClientOffersType): LowToHighActionType => ({
   type: ActionType.LowToHigh,
   payload,
 });
 
-export const HighToLowAction = (payload: OffersType): HighToLowActionType => ({
+export const HighToLowAction = (payload: ClientOffersType): HighToLowActionType => ({
   type: ActionType.HighToLow,
   payload,
 });
 
-export const TopRatedAction = (payload: OffersType): TopRatedActionType => ({
+export const TopRatedAction = (payload: ClientOffersType): TopRatedActionType => ({
   type: ActionType.TopRated,
   payload,
 });

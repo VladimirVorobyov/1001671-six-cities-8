@@ -1,4 +1,9 @@
-import { OffersType } from '../types/offers-type';
+import { AuthorizationStatus } from './../const';
+import { ClientOffersType } from '../types/offers-type';
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { AxiosInstance } from 'axios';
+import { State } from './State';
+import { AppRoute } from './../const';
 
 export enum ActionType {
   MapAction = 'MapAction',
@@ -6,11 +11,26 @@ export enum ActionType {
   LowToHigh = 'Price: low to high',
   HighToLow = 'Price: high to low',
   TopRated = 'Top rated first',
-  ActiveCard = 'Active Card'
+  ActiveCard = 'Active Card',
+  RequireAuthorization = 'user/requireAuthorization',
+  RequireLogout = 'user/requireLogout',
+  LoadOffers = 'data/loadOffers',
+  RedirectToRoute = 'redirectToRoute',
 }
+
+export type RedirectToRouteType = {
+  type: ActionType.RedirectToRoute;
+  payload: AppRoute;
+};
+
+export type LoadOffersType = {
+  type: ActionType.LoadOffers;
+  payload: ClientOffersType;
+};
+
 export type ActiveCardType = {
   type: ActionType.ActiveCard;
-  payload: string;
+  payload: number;
 };
 
 export type MapActionType = {
@@ -25,17 +45,27 @@ export type CityActionType = {
 
 export type LowToHighActionType = {
   type: ActionType.LowToHigh;
-  payload: OffersType;
+  payload: ClientOffersType;
 };
 
 export type HighToLowActionType = {
   type: ActionType.HighToLow;
-  payload: OffersType;
+  payload: ClientOffersType;
 };
 
 export type TopRatedActionType = {
   type: ActionType.TopRated;
-  payload: OffersType;
+  payload: ClientOffersType;
+};
+
+export type AuthorizationType = {
+  type: ActionType.RequireAuthorization;
+  payload: AuthorizationStatus;
+};
+
+
+export type LogoutType = {
+  type: ActionType.RequireLogout;
 };
 
 export type Actions =
@@ -44,4 +74,17 @@ export type Actions =
   | LowToHighActionType
   | HighToLowActionType
   | TopRatedActionType
-  | ActiveCardType;
+  | ActiveCardType
+  | AuthorizationType
+  | LogoutType
+  | LoadOffersType
+  | RedirectToRouteType;
+
+export type ThunkActionResult<R = Promise<void>> = ThunkAction<
+    R,
+    State,
+    AxiosInstance,
+    Actions
+  >;
+
+export type ThunkAppDispatch = ThunkDispatch<State, AxiosInstance, Actions>;

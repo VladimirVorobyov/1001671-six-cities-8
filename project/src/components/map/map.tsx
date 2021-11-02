@@ -4,12 +4,12 @@ import imgGeneral from '../../img/pin.svg';
 import imgActive from '../../img/pin-active.svg';
 import 'leaflet/dist/leaflet.css';
 import { Icon, Marker } from 'leaflet';
-import { OffersType } from '../../types/offers-type';
+import { ClientOffersType } from '../../types/offers-type';
 import { useTypeSelector } from '../../hooks/useTypeSelector';
 
 
 type MapPropsType = {
-  offers: OffersType;
+  offers: ClientOffersType;
 };
 const defaultCustomIcon = new Icon({
   iconUrl: imgGeneral,
@@ -32,12 +32,12 @@ function Map({ offers }: MapPropsType): JSX.Element {
     if (map) {
       offers.forEach((offer) => {
         const marker = new Marker({
-          lat: offer.lat,
-          lng: offer.lng,
+          lat: offer.location.latitude,
+          lng: offer.location.longitude,
         });
 
         marker
-          .setIcon(active === offer.id ? currentCustomIcon : defaultCustomIcon)
+          .setIcon(+active === offer.id ? currentCustomIcon : defaultCustomIcon)
           .addTo(map);
       });
     }

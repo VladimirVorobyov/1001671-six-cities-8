@@ -1,3 +1,27 @@
+type Locaction = {
+  latitude: number,
+  longitude: number,
+  zoom: number
+}
+type City = {
+  name : string,
+  location: Locaction,
+}
+
+type Host = {
+  id: number,
+  name: string,
+  'is_pro': boolean,
+  'avatar_url': string,
+}
+type HostClient = {
+  id: number;
+  name: string;
+  pro: boolean;
+  avatar: string;
+};
+
+
 export type CommentOfferType = {
   id: string,
   imgAutor: string,
@@ -9,32 +33,50 @@ export type CommentOfferType = {
 
 export type CommentsOfferType = CommentOfferType[];
 
-export type OfferType = {
-  id: string,
-  city:string,
-  name:string,
-  img:string,
-  premium:boolean,
-  type:string,
-  rating:number,
-  description: string[],
-  bedrooms: string,
-  adults: string,
-  things:string[],
-  fullImg:string[],
-  nameBoss: string,
-  imgBoss: string,
-  comments : CommentOfferType[],
-  cost: number,
-  favorites:boolean,
-  lat:number,
-  lng: number,
+export type ClientOfferType = {
+  id: number;
+  city: City;
+  previewImage: string;
+  images: string[];
+  title: string;
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
+  type: string;
+  bedrooms: number;
+  maxAdults: number;
+  price: number;
+  goods: string[];
+  description: string;
+  location: Locaction;
+  host: HostClient;
 };
 
+export type OfferType = {
+  id: number,
+  city: City,
+  'preview_image': string,
+  images: string[],
+  title: string,
+  'is_favorite': boolean,
+  'is_premium': boolean,
+  rating: number,
+  type: string,
+  bedrooms: number,
+  'max_adults': number,
+  price: number,
+  goods: string[],
+  description: string,
+  location : Locaction,
+  host: Host,
+};
 export type OffersType = OfferType[];
-export type MapType = Pick<OfferType, 'city' | 'lat' | 'lng'> & {
+export type ClientOffersType = ClientOfferType[];
+export type MapType = {
+  city: string;
+  lat: number;
+  lng: number;
   zoom: number;
   active: boolean;
-  countOffer: number;
 };
 export type MapsType = MapType[];

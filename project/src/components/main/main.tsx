@@ -1,12 +1,14 @@
-import Logo from '../logo/logo';
-import { OffersType } from '../../types/offers-type';
+import { ClientOffersType } from '../../types/offers-type';
 import CardsList from '../cards-list/cards-list';
 import Cities from '../cities/cities';
+import Header from '../header/header';
+
 type MainProps = {
-  offersActive: OffersType;
+  offersActive: ClientOffersType;
 };
 
 function Main({offersActive}: MainProps): JSX.Element {
+
   return (
     <>
       <div style={{ display: 'none' }}>
@@ -34,39 +36,11 @@ function Main({offersActive}: MainProps): JSX.Element {
       </div>
 
       <div className="page page--gray page--main">
-        <header className="header">
-          <div className="container">
-            <div className="header__wrapper">
-              <Logo />
-              <nav className="header__nav">
-                <ul className="header__nav-list">
-                  <li className="header__nav-item user">
-                    <a
-                      href="/"
-                      className="header__nav-link header__nav-link--profile"
-                    >
-                      <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                      <span className="header__user-name user__name">
-                        Oliver.conner@gmail.com
-                      </span>
-                    </a>
-                  </li>
-                  <li className="header__nav-item">
-                    <a href="/" className="header__nav-link">
-                      <span className="header__signout">Sign out</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </header>
+        <Header/>
 
         <main className="page__main page__main--index">
           <Cities />
-          <CardsList
-            offersActive={offersActive}
-          />
+          <CardsList offersActive={offersActive} />
         </main>
       </div>
     </>

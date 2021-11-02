@@ -3,11 +3,10 @@ import { MapsType} from '../types/offers-type';
 const mapMock: MapsType = [
   {
     city: 'Paris',
-    lat: 48.7912,
-    lng: 2.4055,
-    zoom: 10,
+    lat: 48.8512,
+    lng: 2.3455,
+    zoom: 12,
     active: true,
-    countOffer: 14,
   },
   {
     city: 'Cologne',
@@ -15,7 +14,6 @@ const mapMock: MapsType = [
     lng: 6.97,
     zoom: 12,
     active: false,
-    countOffer: 11,
   },
   {
     city: 'Brussels',
@@ -23,7 +21,6 @@ const mapMock: MapsType = [
     lng: 4.409268,
     zoom: 11,
     active: false,
-    countOffer: 15,
   },
   {
     city: 'Amsterdam',
@@ -31,7 +28,6 @@ const mapMock: MapsType = [
     lng: 4.9322,
     zoom: 11,
     active: false,
-    countOffer: 19,
   },
   {
     city: 'Hamburg',
@@ -39,7 +35,6 @@ const mapMock: MapsType = [
     lng: 10.1204,
     zoom: 11,
     active: false,
-    countOffer: 21,
   },
   {
     city: 'Dusseldorf',
@@ -47,7 +42,6 @@ const mapMock: MapsType = [
     lng: 6.77616,
     zoom: 12,
     active: false,
-    countOffer: 1,
   },
 ];
 
