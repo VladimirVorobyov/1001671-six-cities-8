@@ -11,6 +11,7 @@ import Map from '../map/map';
 import comments from '../../mocks/comments';
 import { useTypeSelector } from '../../hooks/useTypeSelector';
 import Header from '../header/header';
+import { getOffers } from '../../store/sort-offers/selectors';
 
 function Room (): JSX.Element {
   const [form, setForm] = useState({
@@ -20,7 +21,7 @@ function Room (): JSX.Element {
   type IdParams = {
     id: string;
   }
-  const offers = useTypeSelector((state)=>state.offers);
+  const offers = useTypeSelector(getOffers);
   const {id}:IdParams = useParams();
   const offer = offers.find((item) => item.id === +id);
   const cards = offers.filter((item) => item.id !== +id);

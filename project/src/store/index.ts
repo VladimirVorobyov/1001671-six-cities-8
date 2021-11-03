@@ -1,6 +1,6 @@
 import { applyMiddleware, createStore} from 'redux';
 import thunk from 'redux-thunk';
-import cityReducer from './citiesReducer';
+import { rootReducer } from './root-reducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import {createAPI} from '../services/api';
 import { requireAuthorization } from './action';
@@ -10,7 +10,7 @@ import { redirect } from './redirect';
 const api = createAPI(() =>store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth)));
 
 const store = createStore(
-  cityReducer,
+  rootReducer,
   composeWithDevTools(
     applyMiddleware(thunk.withExtraArgument(api)),
     applyMiddleware(redirect),

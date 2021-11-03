@@ -9,10 +9,16 @@ import {
   AuthorizationType,
   LogoutType,
   LoadOffersType,
-  RedirectToRouteType
+  RedirectToRouteType,
+  EmailUserType
 } from '../types/ActionType';
 import { ClientOffersType } from '../types/offers-type';
 import { AuthorizationStatus, AppRoute } from '../const';
+
+export const emailAction = (payload: string): EmailUserType => ({
+  type: ActionType.EmailUser,
+  payload,
+});
 
 export const redirectToRoute = (payload: AppRoute): RedirectToRouteType => ({
   type: ActionType.RedirectToRoute,

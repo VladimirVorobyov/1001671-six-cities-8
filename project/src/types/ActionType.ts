@@ -16,7 +16,13 @@ export enum ActionType {
   RequireLogout = 'user/requireLogout',
   LoadOffers = 'data/loadOffers',
   RedirectToRoute = 'redirectToRoute',
+  EmailUser = 'user/email'
 }
+
+export type EmailUserType = {
+  type: ActionType.EmailUser;
+  payload: string;
+};
 
 export type RedirectToRouteType = {
   type: ActionType.RedirectToRoute;
@@ -78,7 +84,8 @@ export type Actions =
   | AuthorizationType
   | LogoutType
   | LoadOffersType
-  | RedirectToRouteType;
+  | RedirectToRouteType
+  | EmailUserType;
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<
     R,

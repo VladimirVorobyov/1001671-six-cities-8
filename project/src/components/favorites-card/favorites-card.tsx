@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom';
+import { useTypeSelector } from '../../hooks/useTypeSelector';
+import { getActive } from '../../store/sort-offers/selectors';
 import { ClientOfferType } from '../../types/offers-type';
 
 type CardProps = {
@@ -5,10 +8,11 @@ type CardProps = {
 };
 
 function FavoritesCard ({card}:CardProps): JSX.Element{
+  const active = useTypeSelector(getActive);
   return (
     <article className="favorites__card place-card">
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <a href="/">
+        <Link to={`/offer/${active}`}>
           <img
             className="place-card__image"
             src={card.previewImage}
@@ -16,7 +20,7 @@ function FavoritesCard ({card}:CardProps): JSX.Element{
             height="110"
             alt="Place"
           />
-        </a>
+        </Link>
       </div>
       <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
@@ -41,7 +45,7 @@ function FavoritesCard ({card}:CardProps): JSX.Element{
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="/">{card.title}</a>
+          <Link to={`/offer/${active}`}>{card.title}</Link>
         </h2>
         <p className="place-card__type">{card.type}</p>
       </div>

@@ -2,6 +2,7 @@ import Logo from '../logo/logo';
 import { useDispatch } from 'react-redux';
 import { useRef, FormEvent,memo, useCallback } from 'react';
 import { loginAction } from '../../store/api-action';
+import { emailAction } from '../../store/action';
 
 function Login (): JSX.Element {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ function Login (): JSX.Element {
           password: passwordRef.current.value,
         };
         dispatch(loginAction(authData));
+        dispatch(emailAction(loginRef.current.value));
       }
     },
     [dispatch],
@@ -98,6 +100,9 @@ function Login (): JSX.Element {
             </section>
             <section className="locations locations--login locations--current">
               <div className="locations__item">
+                <a href="/" className="locations__item-link">
+                  <span>Amsterdam</span>
+                </a>
               </div>
             </section>
           </div>

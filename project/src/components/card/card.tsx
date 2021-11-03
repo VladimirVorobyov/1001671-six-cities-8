@@ -28,7 +28,7 @@ function Card({ item}: CardScreenProps): JSX.Element {
         </div>
       )}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="/">
+        <Link to={`/offer/${item.id}`}>
           <img
             className="place-card__image"
             src={item.previewImage}
@@ -36,7 +36,7 @@ function Card({ item}: CardScreenProps): JSX.Element {
             height="200"
             alt="Place"
           />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">

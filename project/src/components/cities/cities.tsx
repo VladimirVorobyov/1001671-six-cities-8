@@ -1,6 +1,5 @@
 import mapMock from '../../mocks/map';
 import City from './city/city';
-import React from 'react';
 
 function Cities(): JSX.Element {
   return (
@@ -19,4 +18,4 @@ function Cities(): JSX.Element {
   );
 }
 
-export default React.memo(Cities);
+export default Cities;

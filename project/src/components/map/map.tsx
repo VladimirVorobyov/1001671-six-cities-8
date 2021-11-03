@@ -6,6 +6,7 @@ import 'leaflet/dist/leaflet.css';
 import { Icon, Marker } from 'leaflet';
 import { ClientOffersType } from '../../types/offers-type';
 import { useTypeSelector } from '../../hooks/useTypeSelector';
+import {getActive} from '../../store/sort-offers/selectors';
 
 
 type MapPropsType = {
@@ -24,7 +25,7 @@ const currentCustomIcon = new Icon({
 });
 
 function Map({ offers }: MapPropsType): JSX.Element {
-  const active = useTypeSelector((state)=>state.active);
+  const active = useTypeSelector(getActive);
   const mapRef = useRef(null);
   const map = useMap(mapRef);
 
