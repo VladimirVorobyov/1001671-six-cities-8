@@ -3,6 +3,12 @@ import { ClientOfferType } from '../../types/offers-type';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {ActiveCard} from '../../store/action';
+import {
+  fullOfferAction,
+  offerNearbyAction,
+  commentOfferAction
+} from '../../store/api-action';
+
 type CardScreenProps = {
   item: ClientOfferType;
 };
@@ -14,6 +20,7 @@ const style = {
     fill: 'none',
   },
 };
+
 
 function Card({ item}: CardScreenProps): JSX.Element {
   const dispatch = useDispatch();
@@ -28,7 +35,14 @@ function Card({ item}: CardScreenProps): JSX.Element {
         </div>
       )}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`/offer/${item.id}`}>
+        <Link
+          to={`/offer/${item.id}`}
+          onClick={() =>{
+            dispatch(offerNearbyAction(item.id));
+            dispatch(fullOfferAction(item.id));
+            dispatch(commentOfferAction(item.id));
+          }}
+        >
           <img
             className="place-card__image"
             src={item.previewImage}
@@ -63,7 +77,16 @@ function Card({ item}: CardScreenProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${item.id}`}>{item.title}</Link>
+          <Link
+            to={`/offer/${item.id}`}
+            onClick={() =>{
+              dispatch(fullOfferAction(item.id));
+              dispatch(offerNearbyAction(item.id));
+              dispatch(commentOfferAction(item.id));
+            }}
+          >
+            {item.title}
+          </Link>
         </h2>
         <p className="place-card__type">{item.type}</p>
       </div>

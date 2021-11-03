@@ -1,5 +1,9 @@
 import { AuthorizationStatus } from './../const';
-import { ClientOffersType } from '../types/offers-type';
+import {
+  ClientOffersType,
+  ClientOfferType,
+  CommentsOfferType
+} from '../types/offers-type';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { AxiosInstance } from 'axios';
 import { State } from './State';
@@ -16,8 +20,26 @@ export enum ActionType {
   RequireLogout = 'user/requireLogout',
   LoadOffers = 'data/loadOffers',
   RedirectToRoute = 'redirectToRoute',
-  EmailUser = 'user/email'
+  EmailUser = 'user/email',
+  ClientOffer = 'data/fullOffer',
+  OffersNearby = 'data/nearby',
+  Commnets = 'data/comments'
 }
+
+export type CommentsType = {
+  type: ActionType.Commnets;
+  payload: CommentsOfferType;
+};
+
+export type offersNearbyType = {
+  type: ActionType.OffersNearby;
+  payload: ClientOffersType;
+};
+
+export type fullOfferType = {
+  type: ActionType.ClientOffer;
+  payload: ClientOfferType;
+};
 
 export type EmailUserType = {
   type: ActionType.EmailUser;
@@ -85,7 +107,10 @@ export type Actions =
   | LogoutType
   | LoadOffersType
   | RedirectToRouteType
-  | EmailUserType;
+  | EmailUserType
+  | fullOfferType
+  | offersNearbyType
+  | CommentsType;
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<
     R,

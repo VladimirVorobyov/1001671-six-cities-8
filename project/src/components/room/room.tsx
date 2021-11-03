@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams } from 'react-router';
+// import { useParams } from 'react-router';
 import Card from '../card/card';
 import Comment from '../comment/comment';
 import Error from '../error/error';
@@ -8,25 +8,25 @@ import DescriptionRoom from './description-room';
 import FullImgRoom from './full-img-room';
 import InsideList from './inside-list';
 import Map from '../map/map';
-import comments from '../../mocks/comments';
 import { useTypeSelector } from '../../hooks/useTypeSelector';
 import Header from '../header/header';
-import { getOffers } from '../../store/sort-offers/selectors';
+// import { getOffers } from '../../store/sort-offers/selectors';
+import { getFullOffer, getNearby } from '../../store/full-offer/selectors';
 
 function Room (): JSX.Element {
   const [form, setForm] = useState({
     rating:'',
     discription:'',
   });
-  type IdParams = {
-    id: string;
-  }
-  const offers = useTypeSelector(getOffers);
-  const {id}:IdParams = useParams();
-  const offer = offers.find((item) => item.id === +id);
-  const cards = offers.filter((item) => item.id !== +id);
+  // type IdParams = {
+  //   id: string;
+  // }
+  // const offers = useTypeSelector(getOffers);
+  const offer = useTypeSelector(getFullOffer);
+  // const {id}:IdParams = useParams();
+  const cards = useTypeSelector(getNearby);
 
-  return id && offer && cards ? (
+  return offer && cards ? (
     <>
       <div style={{ display: 'none' }}>
         <svg xmlns="http://www.w3.org/2000/svg">
@@ -141,7 +141,7 @@ function Room (): JSX.Element {
                   </div>
                 </div>
                 <section className="property__reviews reviews">
-                  <ListComment comments={comments} />
+                  <ListComment/>
                   <Comment setForm={setForm} form={form} />
                 </section>
               </div>

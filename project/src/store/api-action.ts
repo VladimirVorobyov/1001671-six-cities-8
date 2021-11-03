@@ -1,33 +1,48 @@
-import { LoadOffers, requireAuthorization, requireLogout,redirectToRoute } from './action';
-import { OffersType, ClientOffersType } from './../types/offers-type';
+import { commentAdapter, ServerComments } from './../adapter';
+import {
+  LoadOffers,
+  requireAuthorization,
+  requireLogout,
+  redirectToRoute,
+  fullOffer,
+  offerNearby,
+  commentsOffer
+} from './action';
+import {
+  OffersType,
+  OfferType
+} from './../types/offers-type';
 import {ThunkActionResult} from '../types/ActionType';
 import { APIRoute, AuthorizationStatus, AppRoute } from '../const';
 import {AuthData} from '../types/auth-data';
 import { Token, saveToken, dropToken } from '../services/token';
+import {adapterOfffers,adapterFullOffer} from '../adapter';
 
-const adapterOfffers = (offers: OffersType): ClientOffersType => offers.map((item) => ({
-  id: item.id,
-  city: item.city,
-  previewImage: item.preview_image,
-  images: item.images,
-  title: item.title,
-  isFavorite: item.is_favorite,
-  isPremium: item.is_premium,
-  rating: item.rating,
-  type: item.type,
-  bedrooms: item.bedrooms,
-  maxAdults: item.max_adults,
-  price: item.price,
-  goods: item.goods,
-  description: item.description,
-  location: item.location,
-  host: {
-    id: item.host.id,
-    name: item.host.name,
-    pro: item.host.is_pro,
-    avatar: item.host.avatar_url,
-  },
-}));
+export const fullOfferAction =
+  (active:number): ThunkActionResult =>
+    async (dispatch, _getState, api): Promise<void> => {
+      const { data } = await api.get<OfferType>(`/hotels/${active}`);
+      dispatch(fullOffer(adapterFullOffer(data)));
+    };
+export const offerCommentsAction =
+  (active: number): ThunkActionResult =>
+    async (dispatch, _getState, api): Promise<void> => {
+      const { data } = await api.get<OfferType>(`/hotels/${active}`);
+      dispatch(fullOffer(adapterFullOffer(data)));
+    };
+export const commentOfferAction =
+  (active: number): ThunkActionResult =>
+    async (dispatch, _getState, api): Promise<void> => {
+      const { data } = await api.get<ServerComments>(`/comments/${active}`);
+      dispatch(commentsOffer(commentAdapter(data)));
+    };
+
+export const offerNearbyAction =
+  (active: number): ThunkActionResult =>
+    async (dispatch, _getState, api): Promise<void> => {
+      const { data } = await api.get<OffersType>(`/hotels/${active}/nearby`);
+      dispatch(offerNearby(adapterOfffers(data)));
+    };
 
 export const fetchOffersnAction =
   (): ThunkActionResult =>

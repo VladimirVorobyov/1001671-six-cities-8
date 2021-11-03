@@ -1,6 +1,13 @@
+import { CommentsOfferType } from './offers-type';
 import { RootState } from './../store/root-reducer';
 import { AuthorizationStatus } from './../const';
-import { ClientOffersType, MapsType, MapType } from '../types/offers-type';
+import { ClientOffersType, MapsType, MapType,ClientOfferType } from '../types/offers-type';
+
+export type FullOfferType = {
+  fullOffer: ClientOfferType;
+  offersNearby: ClientOffersType;
+  comments:CommentsOfferType;
+};
 
 
 export type UserProcess = {

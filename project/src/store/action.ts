@@ -10,10 +10,31 @@ import {
   LogoutType,
   LoadOffersType,
   RedirectToRouteType,
-  EmailUserType
+  EmailUserType,
+  fullOfferType,
+  offersNearbyType,
+  CommentsType
 } from '../types/ActionType';
-import { ClientOffersType } from '../types/offers-type';
+import {
+  ClientOffersType,
+  ClientOfferType,
+  CommentsOfferType
+} from '../types/offers-type';
 import { AuthorizationStatus, AppRoute } from '../const';
+
+export const commentsOffer = (payload: CommentsOfferType): CommentsType => ({
+  type: ActionType.Commnets,
+  payload,
+});
+
+export const offerNearby = (payload: ClientOffersType): offersNearbyType => ({
+  type: ActionType.OffersNearby,
+  payload,
+});
+export const fullOffer = (payload: ClientOfferType): fullOfferType => ({
+  type: ActionType.ClientOffer,
+  payload,
+});
 
 export const emailAction = (payload: string): EmailUserType => ({
   type: ActionType.EmailUser,
