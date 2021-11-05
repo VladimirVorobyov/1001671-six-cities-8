@@ -10,13 +10,11 @@ import { useTypeSelector } from '../../hooks/useTypeSelector';
 import Loading from '../loading/loading';
 import browserHistory from '../../browser-history';
 import {getOffers} from '../../store/sort-offers/selectors';
-import {getLoaded} from '../../store/authorization/selectors';
+import {getLoaded,getAuthorization} from '../../store/authorization/selectors';
 
 function App(): JSX.Element {
   const offersActive = useTypeSelector(getOffers);
-  const authorizationStatus = useTypeSelector(
-    (state) => state.USER.authorizationStatus,
-  );
+  const authorizationStatus = useTypeSelector(getAuthorization);
   const isDataLoaded = useTypeSelector(getLoaded);
   if (AuthorizationStatus.Unknown === authorizationStatus || !isDataLoaded) {
     return <Loading />;

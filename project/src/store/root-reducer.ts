@@ -4,15 +4,15 @@ import { authorization } from './authorization/authorization';
 import { fullOfferReducer } from './full-offer/full-offer';
 
 export enum NameSpace {
-  data = 'DATA',
-  user = 'USER',
-  fullOffer = 'FULL_OFFER'
+  DATA = 'DATA',
+  USER = 'USER',
+  FULL_OFFER = 'FULL_OFFER'
 }
 
 export const rootReducer = combineReducers({
-  [NameSpace.data]: sortOffers,
-  [NameSpace.user]: authorization,
-  [NameSpace.fullOffer]: fullOfferReducer,
+  [NameSpace.DATA]: sortOffers,
+  [NameSpace.USER]: authorization,
+  [NameSpace.FULL_OFFER]: fullOfferReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

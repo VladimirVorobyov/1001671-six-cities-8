@@ -2,7 +2,6 @@ import Logo from '../logo/logo';
 import { useDispatch } from 'react-redux';
 import { useRef, FormEvent,memo, useCallback } from 'react';
 import { loginAction } from '../../store/api-action';
-import { emailAction } from '../../store/action';
 
 function Login (): JSX.Element {
   const dispatch = useDispatch();
@@ -19,7 +18,6 @@ function Login (): JSX.Element {
           password: passwordRef.current.value,
         };
         dispatch(loginAction(authData));
-        dispatch(emailAction(loginRef.current.value));
       }
     },
     [dispatch],

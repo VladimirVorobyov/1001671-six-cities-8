@@ -34,10 +34,8 @@ function Header(): JSX.Element {
                   <li className="header__nav-item">
                     <button
                       className="header__nav-link"
-                      onClick={(evt) => {
-                        evt.preventDefault();
+                      onSubmit={() => {
                         dispatch(logoutAction());
-                        browserHistory.push(AppRoute.Main);
                       }}
                     >
                       <span className="header__signout">Sign out</span>

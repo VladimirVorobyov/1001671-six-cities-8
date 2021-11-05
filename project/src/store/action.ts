@@ -22,16 +22,16 @@ import {
 } from '../types/offers-type';
 import { AuthorizationStatus, AppRoute } from '../const';
 
-export const commentsOffer = (payload: CommentsOfferType): CommentsType => ({
+export const commentsOfferAction = (payload: CommentsOfferType): CommentsType => ({
   type: ActionType.Commnets,
   payload,
 });
 
-export const offerNearby = (payload: ClientOffersType): offersNearbyType => ({
+export const offersNearbyAction = (payload: ClientOffersType): offersNearbyType => ({
   type: ActionType.OffersNearby,
   payload,
 });
-export const fullOffer = (payload: ClientOfferType): fullOfferType => ({
+export const detailedOfferAction = (payload: ClientOfferType): fullOfferType => ({
   type: ActionType.ClientOffer,
   payload,
 });
@@ -41,53 +41,53 @@ export const emailAction = (payload: string): EmailUserType => ({
   payload,
 });
 
-export const redirectToRoute = (payload: AppRoute): RedirectToRouteType => ({
+export const redirectToRouteAction = (payload: AppRoute): RedirectToRouteType => ({
   type: ActionType.RedirectToRoute,
   payload,
 });
 
-export const LoadOffers = (payload: ClientOffersType): LoadOffersType => ({
+export const loadOffersAction = (payload: ClientOffersType): LoadOffersType => ({
   type: ActionType.LoadOffers,
   payload,
 });
 
-export const requireAuthorization = (
+export const requireAuthorizationAction = (
   payload: AuthorizationStatus,
 ): AuthorizationType => ({
   type: ActionType.RequireAuthorization,
   payload,
 });
 
-export const requireLogout = (): LogoutType => ({
+export const requireLogoutAction = (): LogoutType => ({
   type: ActionType.RequireLogout,
 });
 
-export const ActiveCard = (payload: number): ActiveCardType => ({
+export const activeCardAction = (payload: number): ActiveCardType => ({
   type: ActionType.ActiveCard,
   payload,
 });
 
-export const MapAction = (payload: string): MapActionType => ({
+export const mapAction = (payload: string): MapActionType => ({
   type: ActionType.MapAction,
   payload,
 });
 
-export const CityAction = (payload: string): CityActionType => ({
+export const cityAction = (payload: string): CityActionType => ({
   type: ActionType.CityAction,
   payload,
 });
 
-export const LowToHighAction = (payload: ClientOffersType): LowToHighActionType => ({
+export const lowToHighAction = (payload: ClientOffersType): LowToHighActionType => ({
   type: ActionType.LowToHigh,
   payload,
 });
 
-export const HighToLowAction = (payload: ClientOffersType): HighToLowActionType => ({
+export const highToLowAction = (payload: ClientOffersType): HighToLowActionType => ({
   type: ActionType.HighToLow,
   payload,
 });
 
-export const TopRatedAction = (payload: ClientOffersType): TopRatedActionType => ({
+export const topRatedAction = (payload: ClientOffersType): TopRatedActionType => ({
   type: ActionType.TopRated,
   payload,
 });

@@ -1,15 +1,13 @@
 import { ActionType, Actions } from '../../types/ActionType';
 import { SortOffers } from '../../types/State';
 import mapMock from '../../mocks/map';
-const CITY_PARIS = mapMock[0];
-const DEFAULT_CITY = 'Paris';
-
+const DEFAULT_CITY = mapMock[0];
 
 const initialState: SortOffers = {
   offersLoad: [],
   cities: mapMock,
   offers: [],
-  map: CITY_PARIS,
+  map: DEFAULT_CITY,
   active: 0,
 };
 
@@ -61,7 +59,7 @@ const sortOffers = (state = initialState, action: Actions): SortOffers => {
         ...state,
         offersLoad: action.payload,
         offers: [...action.payload].filter(
-          (item) => item.city.name === DEFAULT_CITY),
+          (item) => item.city.name === DEFAULT_CITY.city),
       };
     default:
       return state;

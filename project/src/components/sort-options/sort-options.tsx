@@ -2,9 +2,9 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { ClientOffersType } from '../../types/offers-type';
 import {
-  LowToHighAction,
-  HighToLowAction,
-  TopRatedAction
+  lowToHighAction,
+  highToLowAction,
+  topRatedAction
 } from '../../store/action';
 type SortProps = {
   offersActive: ClientOffersType;
@@ -26,7 +26,7 @@ function SortOptions({ offersActive }: SortProps): JSX.Element {
           Popular
         </li>
         <li
-          onClick={() => dispatch(LowToHighAction(offersActive))}
+          onClick={() => dispatch(lowToHighAction(offersActive))}
           className="places__option"
           tabIndex={0}
         >
@@ -35,14 +35,14 @@ function SortOptions({ offersActive }: SortProps): JSX.Element {
         <li
           className="places__option"
           tabIndex={0}
-          onClick={() => dispatch(HighToLowAction(offersActive))}
+          onClick={() => dispatch(highToLowAction(offersActive))}
         >
           Price: high to low
         </li>
         <li
           className="places__option"
           tabIndex={0}
-          onClick={() => dispatch(TopRatedAction(offersActive))}
+          onClick={() => dispatch(topRatedAction(offersActive))}
         >
           Top rated first
         </li>

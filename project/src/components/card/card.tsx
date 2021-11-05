@@ -2,7 +2,7 @@ import React from 'react';
 import { ClientOfferType } from '../../types/offers-type';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import {ActiveCard} from '../../store/action';
+import {activeCardAction} from '../../store/action';
 import {
   fullOfferAction,
   offerNearbyAction,
@@ -27,7 +27,7 @@ function Card({ item}: CardScreenProps): JSX.Element {
   return (
     <article
       className="cities__place-card place-card"
-      onMouseOver={() => dispatch(ActiveCard(item.id))}
+      onMouseOver={() => dispatch(activeCardAction(item.id))}
     >
       {item.isPremium && (
         <div className="place-card__mark">
@@ -72,7 +72,7 @@ function Card({ item}: CardScreenProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: '80%' }}></span>
+            <span style={{ width: '50%' }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

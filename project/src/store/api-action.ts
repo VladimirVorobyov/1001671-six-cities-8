@@ -1,12 +1,13 @@
-import { commentAdapter, ServerComments } from './../adapter';
+import { adaptComments, ServerComments } from './../adapter';
 import {
-  LoadOffers,
-  requireAuthorization,
-  requireLogout,
-  redirectToRoute,
-  fullOffer,
-  offerNearby,
-  commentsOffer
+  loadOffersAction,
+  requireAuthorizationAction,
+  requireLogoutAction,
+  redirectToRouteAction,
+  detailedOfferAction,
+  offersNearbyAction,
+  commentsOfferAction,
+  emailAction
 } from './action';
 import {
   OffersType,
@@ -16,46 +17,47 @@ import {ThunkActionResult} from '../types/ActionType';
 import { APIRoute, AuthorizationStatus, AppRoute } from '../const';
 import {AuthData} from '../types/auth-data';
 import { Token, saveToken, dropToken } from '../services/token';
-import {adapterOfffers,adapterFullOffer} from '../adapter';
+import {adaptOfffers,adaptFullOffer} from '../adapter';
+import browserHistory from '../browser-history';
 
 export const fullOfferAction =
   (active:number): ThunkActionResult =>
     async (dispatch, _getState, api): Promise<void> => {
       const { data } = await api.get<OfferType>(`/hotels/${active}`);
-      dispatch(fullOffer(adapterFullOffer(data)));
+      dispatch(detailedOfferAction(adaptFullOffer(data)));
     };
 export const offerCommentsAction =
   (active: number): ThunkActionResult =>
     async (dispatch, _getState, api): Promise<void> => {
       const { data } = await api.get<OfferType>(`/hotels/${active}`);
-      dispatch(fullOffer(adapterFullOffer(data)));
+      dispatch(detailedOfferAction(adaptFullOffer(data)));
     };
 export const commentOfferAction =
   (active: number): ThunkActionResult =>
     async (dispatch, _getState, api): Promise<void> => {
       const { data } = await api.get<ServerComments>(`/comments/${active}`);
-      dispatch(commentsOffer(commentAdapter(data)));
+      dispatch(commentsOfferAction(adaptComments(data)));
     };
 
 export const offerNearbyAction =
   (active: number): ThunkActionResult =>
     async (dispatch, _getState, api): Promise<void> => {
       const { data } = await api.get<OffersType>(`/hotels/${active}/nearby`);
-      dispatch(offerNearby(adapterOfffers(data)));
+      dispatch(offersNearbyAction(adaptOfffers(data)));
     };
 
 export const fetchOffersnAction =
   (): ThunkActionResult =>
     async (dispatch, _getState, api): Promise<void> => {
       const { data } = await api.get<OffersType>(APIRoute.Offers);
-      dispatch(LoadOffers(adapterOfffers(data)));
+      dispatch(loadOffersAction(adaptOfffers(data)));
     };
 
 
 export const checkAuthAction =
   (): ThunkActionResult => async (dispatch, _getState, api) => {
     await api.get(APIRoute.Login).then(() => {
-      dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+      dispatch(requireAuthorizationAction(AuthorizationStatus.NoAuth));
     });
   };
 
@@ -63,19 +65,21 @@ export const loginAction =
       ({ login: email, password }: AuthData): ThunkActionResult =>
         async (dispatch, _getState, api) => {
           const {
-            data: { token },
-          } = await api.post<{ token: Token }>(APIRoute.Login, {
+            data: { token, email:login },
+          } = await api.post<{ token: Token, email:string }>(APIRoute.Login, {
             email,
             password,
           });
           saveToken(token);
-          dispatch(requireAuthorization(AuthorizationStatus.Auth));
-          dispatch(redirectToRoute(AppRoute.Favorites));
+          dispatch(requireAuthorizationAction(AuthorizationStatus.Auth));
+          dispatch(redirectToRouteAction(AppRoute.Favorites));
+          dispatch(emailAction(login));
         };
 
 export const logoutAction =
       (): ThunkActionResult => async (dispatch, _getState, api) => {
         api.delete(APIRoute.Logout);
         dropToken();
-        dispatch(requireLogout());
+        dispatch(requireLogoutAction());
+        browserHistory.push(AppRoute.Main);
       };

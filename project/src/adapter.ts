@@ -6,7 +6,7 @@ import {
   CommentsOfferType
 } from './types/offers-type';
 
-export const adapterFullOffer = (offer: OfferType): ClientOfferType => ({
+export const adaptFullOffer = (offer: OfferType): ClientOfferType => ({
   id: offer.id,
   city: offer.city,
   previewImage: offer.preview_image,
@@ -30,34 +30,12 @@ export const adapterFullOffer = (offer: OfferType): ClientOfferType => ({
   },
 });
 
-export const adapterOfffers = (offers: OffersType): ClientOffersType =>
-  offers.map((item) => ({
-    id: item.id,
-    city: item.city,
-    previewImage: item.preview_image,
-    images: item.images,
-    title: item.title,
-    isFavorite: item.is_favorite,
-    isPremium: item.is_premium,
-    rating: item.rating,
-    type: item.type,
-    bedrooms: item.bedrooms,
-    maxAdults: item.max_adults,
-    price: item.price,
-    goods: item.goods,
-    description: item.description,
-    location: item.location,
-    host: {
-      id: item.host.id,
-      name: item.host.name,
-      pro: item.host.is_pro,
-      avatar: item.host.avatar_url,
-    },
-  }));
+export const adaptOfffers = (offers: OffersType): ClientOffersType =>
+  offers.map((offer) =>adaptFullOffer(offer) );
 
-export type ServeUserComment = {
+export type ServerUserComment = {
     'avatar_url': string,
-    id: 4,
+    id: number,
     'is_pro': boolean,
     name: string,
 }
@@ -67,11 +45,11 @@ export type ServerComment = {
   date: string,
   id: number,
   rating: number,
-  user: ServeUserComment
+  user: ServerUserComment
 }
 export type ServerComments = ServerComment[];
 
-export const commentAdapter = (comments: ServerComments): CommentsOfferType => comments.map((item) => ({
+export const adaptComments = (comments: ServerComments): CommentsOfferType => comments.map((item) => ({
   id: item.id,
   imgAutor: item.user.avatar_url,
   rating: item.rating,

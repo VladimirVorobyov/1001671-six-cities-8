@@ -1,5 +1,4 @@
-import { useState } from 'react';
-// import { useParams } from 'react-router';
+import { useEffect, useState } from 'react';
 import Card from '../card/card';
 import Comment from '../comment/comment';
 import Error from '../error/error';
@@ -10,20 +9,32 @@ import InsideList from './inside-list';
 import Map from '../map/map';
 import { useTypeSelector } from '../../hooks/useTypeSelector';
 import Header from '../header/header';
-// import { getOffers } from '../../store/sort-offers/selectors';
 import { getFullOffer, getNearby } from '../../store/full-offer/selectors';
+import { useDispatch } from 'react-redux';
+import {
+  fullOfferAction,
+  offerNearbyAction,
+  commentOfferAction
+} from '../../store/api-action';
+import { useParams } from 'react-router';
 
 function Room (): JSX.Element {
   const [form, setForm] = useState({
-    rating:'',
-    discription:'',
+    rating: '',
+    discription: '',
   });
-  // type IdParams = {
-  //   id: string;
-  // }
-  // const offers = useTypeSelector(getOffers);
+  type IdParams = {
+    id: string;
+  }
+  const { id }: IdParams = useParams();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fullOfferAction(+id));
+    dispatch(offerNearbyAction(+id));
+    dispatch(commentOfferAction(+id));
+  },[id]);
+
   const offer = useTypeSelector(getFullOffer);
-  // const {id}:IdParams = useParams();
   const cards = useTypeSelector(getNearby);
 
   return offer && cards ? (
@@ -52,7 +63,7 @@ function Room (): JSX.Element {
         </svg>
       </div>
       <div className="page">
-        <Header/>
+        <Header />
         <main className="page__main page__main--property">
           <section className="property">
             <div className="property__gallery-container container">
@@ -141,7 +152,7 @@ function Room (): JSX.Element {
                   </div>
                 </div>
                 <section className="property__reviews reviews">
-                  <ListComment/>
+                  <ListComment />
                   <Comment setForm={setForm} form={form} />
                 </section>
               </div>
