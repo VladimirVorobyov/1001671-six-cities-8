@@ -1,14 +1,17 @@
+import { useTypeSelector } from '../../hooks/useTypeSelector';
 import { ClientOffersType } from '../../types/offers-type';
 import CardsList from '../cards-list/cards-list';
 import Cities from '../cities/cities';
 import Header from '../header/header';
+import {getOffersLoad} from '../../store/sort-offers/selectors';
+import NoOffers from '../no-offers/no-offers';
 
 type MainProps = {
   offersActive: ClientOffersType;
 };
 
 function Main({offersActive}: MainProps): JSX.Element {
-
+  const dataOffers = useTypeSelector(getOffersLoad);
   return (
     <>
       <div style={{ display: 'none' }}>
@@ -39,8 +42,9 @@ function Main({offersActive}: MainProps): JSX.Element {
         <Header/>
 
         <main className="page__main page__main--index">
-          <Cities />
-          <CardsList offersActive={offersActive} />
+          <Cities/>
+          {dataOffers.length === 0?<NoOffers/>:
+            <CardsList offersActive={offersActive} />}
         </main>
       </div>
     </>

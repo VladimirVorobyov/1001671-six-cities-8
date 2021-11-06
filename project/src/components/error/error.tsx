@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import React from 'react';
 function Error(): JSX.Element{
   return(
     <>
@@ -8,4 +7,4 @@ function Error(): JSX.Element{
     </>);
 }
 
-export default React.memo(Error);
+export default Error;

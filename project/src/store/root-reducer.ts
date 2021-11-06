@@ -4,9 +4,9 @@ import { authorization } from './authorization/authorization';
 import { fullOfferReducer } from './full-offer/full-offer';
 
 export enum NameSpace {
-  DATA = 'DATA',
-  USER = 'USER',
-  FULL_OFFER = 'FULL_OFFER'
+  DATA = 'data',
+  USER = 'user',
+  FULL_OFFER = 'full offer'
 }
 
 export const rootReducer = combineReducers({

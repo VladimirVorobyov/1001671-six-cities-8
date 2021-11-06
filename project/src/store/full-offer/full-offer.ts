@@ -38,6 +38,8 @@ const initialState: FullOfferType = {
   },
   offersNearby: [],
   comments:[],
+  isLoding : false,
+  offersFavorites : [],
 };
 
 const fullOfferReducer = (
@@ -49,11 +51,22 @@ const fullOfferReducer = (
       return {
         ...state,
         fullOffer: action.payload,
+        isLoding : true,
       };
     case ActionType.OffersNearby:
       return {
         ...state,
         offersNearby: action.payload,
+      };
+    case ActionType.Favorites:
+      return {
+        ...state,
+        offersFavorites: action.payload,
+      };
+    case ActionType.isFavorite:
+      return {
+        ...state,
+        offersFavorites:[...state.offersFavorites,action.payload],
       };
     case ActionType.Commnets:
       return {

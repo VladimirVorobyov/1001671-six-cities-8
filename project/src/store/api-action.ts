@@ -1,3 +1,4 @@
+import { CommetnDataType } from './../types/comment-data';
 import { adaptComments, ServerComments } from './../adapter';
 import {
   loadOffersAction,
@@ -7,7 +8,9 @@ import {
   detailedOfferAction,
   offersNearbyAction,
   commentsOfferAction,
-  emailAction
+  emailAction,
+  offersFavoritesAction,
+  isFavoriteOfferAction
 } from './action';
 import {
   OffersType,
@@ -18,7 +21,6 @@ import { APIRoute, AuthorizationStatus, AppRoute } from '../const';
 import {AuthData} from '../types/auth-data';
 import { Token, saveToken, dropToken } from '../services/token';
 import {adaptOfffers,adaptFullOffer} from '../adapter';
-import browserHistory from '../browser-history';
 
 export const fullOfferAction =
   (active:number): ThunkActionResult =>
@@ -26,12 +28,26 @@ export const fullOfferAction =
       const { data } = await api.get<OfferType>(`/hotels/${active}`);
       dispatch(detailedOfferAction(adaptFullOffer(data)));
     };
-export const offerCommentsAction =
-  (active: number): ThunkActionResult =>
+export const favoriteOffersAction =
+  (): ThunkActionResult =>
     async (dispatch, _getState, api): Promise<void> => {
-      const { data } = await api.get<OfferType>(`/hotels/${active}`);
-      dispatch(detailedOfferAction(adaptFullOffer(data)));
+      const { data } = await api.get<OffersType>('/favorite');
+      dispatch(offersFavoritesAction(adaptOfffers(data)));
     };
+export const favoritePushOffersAction =
+  (active:number): ThunkActionResult =>
+    async (dispatch, _getState, api): Promise<void> => {
+      const {data} = await api.post<OfferType>(`/favorite/${active}/1`);
+      dispatch(isFavoriteOfferAction(adaptFullOffer(data)));
+    };
+
+export const commentPostAction =
+  (commentPost: CommetnDataType, active:string): ThunkActionResult =>
+    async (dispatch, _getState, api) => {
+      const {data} = await api.post<ServerComments>(`/comments/${active}`,commentPost);
+      dispatch(commentsOfferAction(adaptComments(data)));
+    };
+
 export const commentOfferAction =
   (active: number): ThunkActionResult =>
     async (dispatch, _getState, api): Promise<void> => {
@@ -81,5 +97,5 @@ export const logoutAction =
         api.delete(APIRoute.Logout);
         dropToken();
         dispatch(requireLogoutAction());
-        browserHistory.push(AppRoute.Main);
+        dispatch(redirectToRouteAction(AppRoute.Main));
       };

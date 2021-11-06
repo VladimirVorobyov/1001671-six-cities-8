@@ -32,7 +32,7 @@ function Header(): JSX.Element {
                     </Link>
                   </li>
                   <li className="header__nav-item">
-                    <button
+                    <button type='button'
                       className="header__nav-link"
                       onSubmit={() => {
                         dispatch(logoutAction());

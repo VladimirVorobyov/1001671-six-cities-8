@@ -3,11 +3,7 @@ import { ClientOfferType } from '../../types/offers-type';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {activeCardAction} from '../../store/action';
-import {
-  fullOfferAction,
-  offerNearbyAction,
-  commentOfferAction
-} from '../../store/api-action';
+import {favoritePushOffersAction} from '../../store/api-action';
 
 type CardScreenProps = {
   item: ClientOfferType;
@@ -24,6 +20,7 @@ const style = {
 
 function Card({ item}: CardScreenProps): JSX.Element {
   const dispatch = useDispatch();
+  const rating = item.rating * 20;
   return (
     <article
       className="cities__place-card place-card"
@@ -35,14 +32,7 @@ function Card({ item}: CardScreenProps): JSX.Element {
         </div>
       )}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link
-          to={`/offer/${item.id}`}
-          onClick={() =>{
-            dispatch(offerNearbyAction(item.id));
-            dispatch(fullOfferAction(item.id));
-            dispatch(commentOfferAction(item.id));
-          }}
-        >
+        <Link to={`/offer/${item.id}`}>
           <img
             className="place-card__image"
             src={item.previewImage}
@@ -58,7 +48,9 @@ function Card({ item}: CardScreenProps): JSX.Element {
             <b className="place-card__price-value">{`\u20AC${item.price}`}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
+          <button onSubmit={()=>dispatch(favoritePushOffersAction(item.id))}
+            className="place-card__bookmark-button button" type="button"
+          >
             <svg
               style={item.isFavorite ? style.svg : style.svgN}
               className="place-card__bookmark-icon"
@@ -72,19 +64,12 @@ function Card({ item}: CardScreenProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: '50%' }}></span>
+            <span style={{ width: `${rating}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link
-            to={`/offer/${item.id}`}
-            onClick={() =>{
-              dispatch(fullOfferAction(item.id));
-              dispatch(offerNearbyAction(item.id));
-              dispatch(commentOfferAction(item.id));
-            }}
-          >
+          <Link to={`/offer/${item.id}`}>
             {item.title}
           </Link>
         </h2>

@@ -23,12 +23,24 @@ export enum ActionType {
   EmailUser = 'user/email',
   ClientOffer = 'data/fullOffer',
   OffersNearby = 'data/nearby',
-  Commnets = 'data/comments'
+  Commnets = 'data/comments',
+  Favorites = 'data/favorites',
+  isFavorite= 'is Favorite',
+}
+
+export type IsFavoriteType = {
+  type: ActionType.isFavorite;
+  payload: ClientOfferType;
 }
 
 export type CommentsType = {
   type: ActionType.Commnets;
   payload: CommentsOfferType;
+};
+
+export type offersFavoriteType = {
+  type: ActionType.Favorites;
+  payload: ClientOffersType;
 };
 
 export type offersNearbyType = {
@@ -110,7 +122,9 @@ export type Actions =
   | EmailUserType
   | fullOfferType
   | offersNearbyType
-  | CommentsType;
+  | CommentsType
+  |offersFavoriteType
+  |IsFavoriteType;
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<
     R,
