@@ -1,5 +1,6 @@
-import mapMock from '../../mocks/map';
+import mapMock from '../../map/map';
 import City from './city/city';
+
 
 function Cities(): JSX.Element {
   return (

@@ -1,6 +1,6 @@
 import { ActionType, Actions } from '../../types/ActionType';
 import { SortOffers } from '../../types/State';
-import mapMock from '../../mocks/map';
+import mapMock from '../../map/map';
 const DEFAULT_CITY = mapMock[0];
 
 const initialState: SortOffers = {
@@ -13,6 +13,22 @@ const initialState: SortOffers = {
 
 const sortOffers = (state = initialState, action: Actions): SortOffers => {
   switch (action.type) {
+    case ActionType.isFavorite:
+      return {
+        ...state,
+        offersLoad:state.offersLoad.map((item)=>{
+          if(item.id === action.payload.id){
+            return action.payload;
+          }
+          return item;
+        }),
+        offers:state.offers.map((item)=>{
+          if(item.id === action.payload.id){
+            return action.payload;
+          }
+          return item;
+        }),
+      };
     case ActionType.CityAction:
       return {
         ...state,

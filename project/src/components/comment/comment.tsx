@@ -1,18 +1,17 @@
 import {MouseEvent} from 'react';
 import { useDispatch } from 'react-redux';
 import { commentPostAction } from '../../store/api-action';
+import {useState} from 'react';
 
-type ReviewProps = {
-  rating: string,
-  discription: string,
-}
 type FormProps = {
-  setForm:(props:ReviewProps)=>void;
-  form: ReviewProps;
   id:string
 }
 
-function Comment ({setForm,form,id}:FormProps): JSX.Element{
+function Comment ({id}:FormProps): JSX.Element{
+  const [form, setForm] = useState({
+    rating: '',
+    discription: '',
+  });
   const dispatch = useDispatch();
   const onPushClick = (event:MouseEvent<HTMLButtonElement>) =>{
     event.preventDefault();
@@ -89,11 +88,15 @@ function Comment ({setForm,form,id}:FormProps): JSX.Element{
         <p className="reviews__help">
   To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit"
-          onClick={(e:MouseEvent<HTMLButtonElement>)=>onPushClick(e)}
-        >
+        { !form.rating || form.discription.length < 50 || form.discription.length > 300 ?
+          <button className="reviews__submit form__submit button" disabled >
             Submit
-        </button>
+          </button>:
+          <button className="reviews__submit form__submit button"
+            onClick={(event)=>onPushClick(event)}
+          >
+            Submit
+          </button>}
       </div>
     </form>
   );

@@ -63,11 +63,6 @@ const fullOfferReducer = (
         ...state,
         offersFavorites: action.payload,
       };
-    case ActionType.isFavorite:
-      return {
-        ...state,
-        offersFavorites:[...state.offersFavorites,action.payload],
-      };
     case ActionType.Commnets:
       return {
         ...state,

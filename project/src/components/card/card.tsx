@@ -1,26 +1,20 @@
-import React from 'react';
 import { ClientOfferType } from '../../types/offers-type';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import {activeCardAction} from '../../store/action';
+import {activeCardAction, redirectToRouteAction} from '../../store/action';
 import {favoritePushOffersAction} from '../../store/api-action';
+import { useTypeSelector } from '../../hooks/useTypeSelector';
+import { getAuthorization } from '../../store/authorization/selectors';
+import { AppRoute, AuthorizationStatus } from '../../const';
 
 type CardScreenProps = {
   item: ClientOfferType;
 };
-const style = {
-  svg: {
-    fill: '#4481c3',
-  },
-  svgN: {
-    fill: 'none',
-  },
-};
-
 
 function Card({ item}: CardScreenProps): JSX.Element {
   const dispatch = useDispatch();
-  const rating = item.rating * 20;
+  const rating = Math.round(item.rating) * 20;
+  const status = useTypeSelector(getAuthorization);
   return (
     <article
       className="cities__place-card place-card"
@@ -48,17 +42,31 @@ function Card({ item}: CardScreenProps): JSX.Element {
             <b className="place-card__price-value">{`\u20AC${item.price}`}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button onSubmit={()=>dispatch(favoritePushOffersAction(item.id))}
-            className="place-card__bookmark-button button" type="button"
+          <button  onClick={(e)=>{
+            e.preventDefault();
+            status === AuthorizationStatus.Auth ?
+              dispatch(favoritePushOffersAction(item))
+              : dispatch(redirectToRouteAction(AppRoute.SignIn));
+          }}
+          className="place-card__bookmark-button button" type="button"
           >
-            <svg
-              style={item.isFavorite ? style.svg : style.svgN}
-              className="place-card__bookmark-icon"
-              width="18"
-              height="19"
-            >
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
+            {item.isFavorite ?
+              <svg
+                style={{fill:'#4481c3'}}
+                className="place-card__bookmark-icon"
+                width="18"
+                height="19"
+              >
+                <use xlinkHref="#icon-bookmark"></use>
+              </svg>:
+              <svg
+                style={{fill:'none'}}
+                className="place-card__bookmark-icon"
+                width="18"
+                height="19"
+              >
+                <use xlinkHref="#icon-bookmark"></use>
+              </svg>}
             <span className="visually-hidden">To bookmarks</span>
           </button>
         </div>
@@ -79,4 +87,4 @@ function Card({ item}: CardScreenProps): JSX.Element {
   );
 }
 
-export default React.memo(Card,(prevProps,nextProps)=>prevProps.item === nextProps.item);
+export default Card;

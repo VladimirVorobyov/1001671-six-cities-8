@@ -34,7 +34,8 @@ function Header(): JSX.Element {
                   <li className="header__nav-item">
                     <button type='button'
                       className="header__nav-link"
-                      onSubmit={() => {
+                      onClick={(evt) => {
+                        evt.preventDefault();
                         dispatch(logoutAction());
                       }}
                     >

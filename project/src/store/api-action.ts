@@ -14,7 +14,8 @@ import {
 } from './action';
 import {
   OffersType,
-  OfferType
+  OfferType,
+  ClientOfferType
 } from './../types/offers-type';
 import {ThunkActionResult} from '../types/ActionType';
 import { APIRoute, AuthorizationStatus, AppRoute } from '../const';
@@ -35,11 +36,18 @@ export const favoriteOffersAction =
       dispatch(offersFavoritesAction(adaptOfffers(data)));
     };
 export const favoritePushOffersAction =
-  (active:number): ThunkActionResult =>
+  (offer:ClientOfferType): ThunkActionResult =>(
     async (dispatch, _getState, api): Promise<void> => {
-      const {data} = await api.post<OfferType>(`/favorite/${active}/1`);
+      const param = offer.isFavorite ? '0':'1';
+      const {data} = await api.post<OfferType>(`/favorite/${offer.id}/${param}`);
       dispatch(isFavoriteOfferAction(adaptFullOffer(data)));
-    };
+    });
+export const favoritePopOffersAction =
+  (active:number): ThunkActionResult =>(
+    async (dispatch, _getState, api): Promise<void> => {
+      const {data} = await api.post<OfferType>(`/favorite/${active}/0`);
+      dispatch(isFavoriteOfferAction(adaptFullOffer(data)));
+    });
 
 export const commentPostAction =
   (commentPost: CommetnDataType, active:string): ThunkActionResult =>

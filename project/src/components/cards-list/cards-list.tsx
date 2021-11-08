@@ -1,16 +1,15 @@
-import { ClientOffersType } from '../../types/offers-type';
 import Card from '../card/card';
 import Map from '../map/map';
 import SortOptions from '../sort-options/sort-options';
 import { useTypeSelector } from '../../hooks/useTypeSelector';
 import {getMap} from '../../store/sort-offers/selectors';
+import { ClientOffersType } from '../../types/offers-type';
+
 type ListProps = {
   offersActive: ClientOffersType;
 };
 
-function CardsList({
-  offersActive,
-}: ListProps): JSX.Element {
+function CardsList({offersActive}: ListProps): JSX.Element {
   const mapState = useTypeSelector(getMap);
   return (
     <div className="cities">

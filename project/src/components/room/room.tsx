@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect} from 'react';
 import Card from '../card/card';
 import Comment from '../comment/comment';
 import ListComment from '../user-comment/list-comment';
@@ -21,10 +21,6 @@ import { AuthorizationStatus } from '../../const';
 import Error from '../error/error';
 
 function Room (): JSX.Element {
-  const [form, setForm] = useState({
-    rating: '',
-    discription: '',
-  });
   type IdParams = {
     id: string;
   }
@@ -158,7 +154,7 @@ function Room (): JSX.Element {
                   </div>
                   <section className="property__reviews reviews">
                     <ListComment />
-                    {status === AuthorizationStatus.Auth && <Comment setForm={setForm} form={form} id={id}/>}
+                    {status === AuthorizationStatus.Auth && <Comment id={id}/>}
                   </section>
                 </div>
               </div>

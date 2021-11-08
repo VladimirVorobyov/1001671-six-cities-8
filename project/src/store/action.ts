@@ -15,7 +15,8 @@ import {
   offersNearbyType,
   CommentsType,
   offersFavoriteType,
-  IsFavoriteType
+  IsFavoriteType,
+  ChangeFavoriteType
 } from '../types/ActionType';
 import {
   ClientOffersType,
@@ -23,6 +24,11 @@ import {
   CommentsOfferType
 } from '../types/offers-type';
 import { AuthorizationStatus, AppRoute } from '../const';
+
+export const changeFavoriteAction = (payload: number): ChangeFavoriteType => ({
+  type: ActionType.ChangeFavorite,
+  payload,
+});
 
 export const isFavoriteOfferAction = (payload: ClientOfferType): IsFavoriteType => ({
   type: ActionType.isFavorite,

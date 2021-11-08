@@ -26,6 +26,12 @@ export enum ActionType {
   Commnets = 'data/comments',
   Favorites = 'data/favorites',
   isFavorite= 'is Favorite',
+  ChangeFavorite = 'change favorite',
+}
+
+export type ChangeFavoriteType = {
+  type: ActionType.ChangeFavorite;
+  payload: number;
 }
 
 export type IsFavoriteType = {
@@ -124,7 +130,8 @@ export type Actions =
   | offersNearbyType
   | CommentsType
   |offersFavoriteType
-  |IsFavoriteType;
+  |IsFavoriteType
+  |ChangeFavoriteType;
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<
     R,
