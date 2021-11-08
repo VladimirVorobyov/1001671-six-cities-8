@@ -1,42 +1,61 @@
 import Logo from '../logo/logo';
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import { logoutAction } from '../../store/api-action';
 import { useDispatch } from 'react-redux';
-import React from 'react';
+import browserHistory from '../../browser-history';
+import { useTypeSelector } from '../../hooks/useTypeSelector';
+import { getAuthorization,getEmail } from '../../store/authorization/selectors';
 
 function Header(): JSX.Element {
   const dispatch = useDispatch();
-  return(
+  const status = useTypeSelector(getAuthorization);
+  const email = useTypeSelector(getEmail);
+  return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
           <Logo />
           <nav className="header__nav">
             <ul className="header__nav-list">
-              <li className="header__nav-item user">
-                <Link
-                  to={AppRoute.Favorites}
-                  className="header__nav-link header__nav-link--profile"
-                >
-                  <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                  <span className="header__user-name user__name">
-                   Oliver.conner@gmail.com
-                  </span>
-                </Link>
-              </li>
-              <li className="header__nav-item">
-                <Link
-                  to="/"
-                  className="header__nav-link"
-                  onClick={(evt) => {
-                    evt.preventDefault();
-                    dispatch(logoutAction());
-                  }}
-                >
-                  <span className="header__signout">Sign out</span>
-                </Link>
-              </li>
+              {status === AuthorizationStatus.Auth ? (
+                <>
+                  <li className="header__nav-item user">
+                    <Link
+                      to={AppRoute.Favorites}
+                      className="header__nav-link header__nav-link--profile"
+                    >
+                      <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+                      <span className="header__user-name user__name">
+                        {email}
+                      </span>
+                    </Link>
+                  </li>
+                  <li className="header__nav-item">
+                    <button type='button'
+                      className="header__nav-link"
+                      onClick={(evt) => {
+                        evt.preventDefault();
+                        dispatch(logoutAction());
+                      }}
+                    >
+                      <span className="header__signout">Sign out</span>
+                    </button>
+                  </li>
+                </>
+              ) : (
+                <li>
+                  <button
+                    className="header__nav-link"
+                    onClick={(evt) => {
+                      evt.preventDefault();
+                      browserHistory.push(AppRoute.SignIn);
+                    }}
+                  >
+                    <span className="header__signout">Sign In</span>
+                  </button>
+                </li>
+              )}
             </ul>
           </nav>
         </div>
@@ -45,4 +64,4 @@ function Header(): JSX.Element {
   );
 }
 
-export default React.memo(Header);
+export default Header;

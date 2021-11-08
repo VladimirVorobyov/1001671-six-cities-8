@@ -1,13 +1,19 @@
 import FavoritesCard from '../favorites-card/favorites-card';
-import { ClientOffersType } from '../../types/offers-type';
 import { useTypeSelector } from '../../hooks/useTypeSelector';
 import Header from '../header/header';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { favoriteOffersAction } from '../../store/api-action';
+import { getFavorites } from '../../store/full-offer/selectors';
+
 
 function Favorites (): JSX.Element {
-  const offers = useTypeSelector(((state)=>state.offersLoad));
-  const offresFavorites: ClientOffersType = offers.filter(
-    (el) => el.isFavorite,
-  );
+  const dispatch = useDispatch();
+  const offresFavorites = useTypeSelector(getFavorites);
+  useEffect(() => {
+    dispatch(favoriteOffersAction());
+  },[offresFavorites]);
+
   return (
     <>
       <div style={{display: 'none'}}>

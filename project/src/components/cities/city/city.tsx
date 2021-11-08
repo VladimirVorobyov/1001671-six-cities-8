@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import {MapAction,CityAction} from '../../../store/action';
+import {mapAction,cityAction} from '../../../store/action';
 import {MapType} from '../../../types/offers-type';
 
 
@@ -19,8 +19,8 @@ function City({ city}: CityType): JSX.Element {
       <span
         className={classList.join(' ')}
         onClick={() =>{
-          dispatch(MapAction(city.city));
-          dispatch(CityAction(city.city));
+          dispatch(mapAction(city.city));
+          dispatch(cityAction(city.city));
         }}
       >
         <span>{city.city}</span>

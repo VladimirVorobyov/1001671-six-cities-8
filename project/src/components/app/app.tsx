@@ -9,13 +9,13 @@ import PrivateRoute from '../private-route/private-route';
 import { useTypeSelector } from '../../hooks/useTypeSelector';
 import Loading from '../loading/loading';
 import browserHistory from '../../browser-history';
+import {getLoaded,getAuthorization} from '../../store/authorization/selectors';
+import { getOffers } from '../../store/sort-offers/selectors';
 
 function App(): JSX.Element {
-  const offersActive = useTypeSelector((state) => state.offers);
-  const authorizationStatus = useTypeSelector(
-    (state) => state.authorizationStatus,
-  );
-  const isDataLoaded = useTypeSelector((state) => state.isDataLoaded);
+  const authorizationStatus = useTypeSelector(getAuthorization);
+  const offersActive = useTypeSelector(getOffers);
+  const isDataLoaded = useTypeSelector(getLoaded);
   if (AuthorizationStatus.Unknown === authorizationStatus || !isDataLoaded) {
     return <Loading />;
   }
@@ -23,7 +23,7 @@ function App(): JSX.Element {
     <BrowserRouter history={browserHistory}>
       <Switch>
         <Route path={AppRoute.Main} exact>
-          <Main offersActive={offersActive} />
+          <Main offersActive={offersActive}/>
         </Route>
         <Route path={AppRoute.SignIn} exact>
           <Login />

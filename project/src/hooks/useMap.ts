@@ -1,10 +1,11 @@
+import { getMap } from './../store/sort-offers/selectors';
 import {useEffect, useState, MutableRefObject} from 'react';
 import {Map,TileLayer} from 'leaflet';
 import { useTypeSelector } from './useTypeSelector';
 
 function useMap(mapRef:MutableRefObject<HTMLElement | null>): Map | null {
   const [map, setMap] = useState<Map | null>(null);
-  const city = useTypeSelector((state) => state.map);
+  const city = useTypeSelector(getMap);
   useEffect(() => {
     if (mapRef.current !== null && map === null && city ) {
       const instance = new Map(mapRef.current, {

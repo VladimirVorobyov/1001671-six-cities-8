@@ -1,5 +1,9 @@
 import { AuthorizationStatus } from './../const';
-import { ClientOffersType } from '../types/offers-type';
+import {
+  ClientOffersType,
+  ClientOfferType,
+  CommentsOfferType
+} from '../types/offers-type';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { AxiosInstance } from 'axios';
 import { State } from './State';
@@ -16,7 +20,49 @@ export enum ActionType {
   RequireLogout = 'user/requireLogout',
   LoadOffers = 'data/loadOffers',
   RedirectToRoute = 'redirectToRoute',
+  EmailUser = 'user/email',
+  ClientOffer = 'data/fullOffer',
+  OffersNearby = 'data/nearby',
+  Commnets = 'data/comments',
+  Favorites = 'data/favorites',
+  isFavorite= 'is Favorite',
+  ChangeFavorite = 'change favorite',
 }
+
+export type ChangeFavoriteType = {
+  type: ActionType.ChangeFavorite;
+  payload: number;
+}
+
+export type IsFavoriteType = {
+  type: ActionType.isFavorite;
+  payload: ClientOfferType;
+}
+
+export type CommentsType = {
+  type: ActionType.Commnets;
+  payload: CommentsOfferType;
+};
+
+export type offersFavoriteType = {
+  type: ActionType.Favorites;
+  payload: ClientOffersType;
+};
+
+export type offersNearbyType = {
+  type: ActionType.OffersNearby;
+  payload: ClientOffersType;
+};
+
+export type fullOfferType = {
+  type: ActionType.ClientOffer;
+  payload: ClientOfferType;
+};
+
+export type EmailUserType = {
+  type: ActionType.EmailUser;
+  payload: string;
+};
 
 export type RedirectToRouteType = {
   type: ActionType.RedirectToRoute;
@@ -78,7 +124,14 @@ export type Actions =
   | AuthorizationType
   | LogoutType
   | LoadOffersType
-  | RedirectToRouteType;
+  | RedirectToRouteType
+  | EmailUserType
+  | fullOfferType
+  | offersNearbyType
+  | CommentsType
+  |offersFavoriteType
+  |IsFavoriteType
+  |ChangeFavoriteType;
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<
     R,

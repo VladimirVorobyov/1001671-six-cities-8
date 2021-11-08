@@ -1,21 +1,34 @@
-import { AuthorizationStatus } from './../const';
-import { Actions, ActionType } from './../types/ActionType';
-import { State } from '../types/State';
-import mapMock from '../mocks/map';
-const CITY_PARIS = mapMock[0];
+import { ActionType, Actions } from '../../types/ActionType';
+import { SortOffers } from '../../types/State';
+import mapMock from '../../map/map';
+const DEFAULT_CITY = mapMock[0];
 
-const initialState = {
+const initialState: SortOffers = {
   offersLoad: [],
   cities: mapMock,
-  offers:[],
-  map: CITY_PARIS,
+  offers: [],
+  map: DEFAULT_CITY,
   active: 0,
-  authorizationStatus: AuthorizationStatus.Unknown,
-  isDataLoaded: false,
 };
 
-const cityReducer = (state: State = initialState, action: Actions): State => {
+const sortOffers = (state = initialState, action: Actions): SortOffers => {
   switch (action.type) {
+    case ActionType.isFavorite:
+      return {
+        ...state,
+        offersLoad:state.offersLoad.map((item)=>{
+          if(item.id === action.payload.id){
+            return action.payload;
+          }
+          return item;
+        }),
+        offers:state.offers.map((item)=>{
+          if(item.id === action.payload.id){
+            return action.payload;
+          }
+          return item;
+        }),
+      };
     case ActionType.CityAction:
       return {
         ...state,
@@ -26,12 +39,16 @@ const cityReducer = (state: State = initialState, action: Actions): State => {
           }
           return item;
         }),
-        offers: state.offersLoad && [...state.offersLoad].filter((item) => item.city.name === action.payload),
+        offers:
+          state.offersLoad &&
+          [...state.offersLoad].filter(
+            (item) => item.city.name === action.payload,
+          ),
       };
     case ActionType.MapAction:
       return {
         ...state,
-        map: mapMock.find((item) => item.city === action.payload),
+        map: [...mapMock].find((item) => item.city === action.payload),
       };
     case ActionType.LowToHigh:
       return {
@@ -53,25 +70,16 @@ const cityReducer = (state: State = initialState, action: Actions): State => {
         ...state,
         active: action.payload,
       };
-    case ActionType.RequireAuthorization:
-      return {
-        ...state,
-        authorizationStatus: action.payload,
-        isDataLoaded: true,
-      };
-    case ActionType.RequireLogout:
-      return { ...state, authorizationStatus: AuthorizationStatus.NoAuth };
     case ActionType.LoadOffers:
       return {
         ...state,
         offersLoad: action.payload,
         offers: [...action.payload].filter(
-          (item) => item.city.name === 'Paris',
-        ),
+          (item) => item.city.name === DEFAULT_CITY.city),
       };
     default:
       return state;
   }
 };
 
-export default cityReducer;
+export { sortOffers };

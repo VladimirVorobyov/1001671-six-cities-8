@@ -8,6 +8,7 @@ import { fetchOffersnAction, checkAuthAction } from './store/api-action';
 
 (store.dispatch as ThunkAppDispatch)(checkAuthAction());
 (store.dispatch as ThunkAppDispatch)(fetchOffersnAction());
+// (store.dispatch as ThunkAppDispatch)(favoriteOffersAction());
 
 ReactDOM.render(
   <React.StrictMode>

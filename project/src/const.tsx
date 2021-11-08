@@ -15,4 +15,5 @@ export enum APIRoute {
   Offers = '/hotels',
   Login = '/login',
   Logout = '/logout',
+  FullOffer = '/hotels/: id',
 }

@@ -1,15 +1,29 @@
 import {MouseEvent} from 'react';
+import { useDispatch } from 'react-redux';
+import { commentPostAction } from '../../store/api-action';
+import {useState} from 'react';
 
-type ReviewProps = {
-  rating: string,
-  discription: string,
-}
 type FormProps = {
-  setForm:(props:ReviewProps)=>void;
-  form: ReviewProps;
+  id:string
 }
 
-function Comment ({setForm,form}:FormProps): JSX.Element{
+function Comment ({id}:FormProps): JSX.Element{
+  const [form, setForm] = useState({
+    rating: '',
+    discription: '',
+  });
+  const dispatch = useDispatch();
+  const onPushClick = (event:MouseEvent<HTMLButtonElement>) =>{
+    event.preventDefault();
+    const comment = {
+      rating:form.rating,
+      comment:form.discription,
+    };
+    dispatch(commentPostAction(comment,id));
+    setForm({rating:'',discription:''});
+  };
+
+
   return(
     <form className="reviews__form form" action="#" method="post" onSubmit={(e)=>
     {
@@ -66,7 +80,7 @@ function Comment ({setForm,form}:FormProps): JSX.Element{
       </div>
       <textarea className="reviews__textarea form__textarea"
         onChange={(e)=>setForm({...form,...{discription:e.target.value}})}
-        id="review" name="review"
+        id="review" name="review" value={form.discription}
         placeholder="Tell how was your stay, what you like and what can be improved"
       >
       </textarea>
@@ -74,15 +88,15 @@ function Comment ({setForm,form}:FormProps): JSX.Element{
         <p className="reviews__help">
   To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit"
-          onClick={(e:MouseEvent<HTMLButtonElement>)=>
-          {
-            e.preventDefault();
-            setForm({rating:'',discription:''});
-          }}
-        >
+        { !form.rating || form.discription.length < 50 || form.discription.length > 300 ?
+          <button className="reviews__submit form__submit button" disabled >
             Submit
-        </button>
+          </button>:
+          <button className="reviews__submit form__submit button"
+            onClick={(event)=>onPushClick(event)}
+          >
+            Submit
+          </button>}
       </div>
     </form>
   );

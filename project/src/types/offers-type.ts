@@ -23,12 +23,14 @@ type HostClient = {
 
 
 export type CommentOfferType = {
-  id: string,
+  id: number,
   imgAutor: string,
   rating:number,
   date: string,
   description:string,
-  Autor:string,
+  autor:string,
+  isPro: boolean,
+  autorId: number
 }
 
 export type CommentsOfferType = CommentOfferType[];

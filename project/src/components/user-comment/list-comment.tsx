@@ -1,11 +1,9 @@
-import {CommentsOfferType} from '../../types/offers-type';
+import { useTypeSelector } from '../../hooks/useTypeSelector';
+import { getComments } from '../../store/full-offer/selectors';
 import UserComment from './user-comment';
 
-type CommentProps = {
-  comments: CommentsOfferType;
-}
-
-function ListComment ({comments}:CommentProps): JSX.Element{
+function ListComment (): JSX.Element{
+  const comments = useTypeSelector(getComments);
   return(
     <>
       <h2 className="reviews__title">Reviews &middot;

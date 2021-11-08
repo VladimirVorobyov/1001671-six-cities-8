@@ -1,26 +1,24 @@
-import React from 'react';
 import { ClientOfferType } from '../../types/offers-type';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import {ActiveCard} from '../../store/action';
+import {activeCardAction, redirectToRouteAction} from '../../store/action';
+import {favoritePushOffersAction} from '../../store/api-action';
+import { useTypeSelector } from '../../hooks/useTypeSelector';
+import { getAuthorization } from '../../store/authorization/selectors';
+import { AppRoute, AuthorizationStatus } from '../../const';
+
 type CardScreenProps = {
   item: ClientOfferType;
-};
-const style = {
-  svg: {
-    fill: '#4481c3',
-  },
-  svgN: {
-    fill: 'none',
-  },
 };
 
 function Card({ item}: CardScreenProps): JSX.Element {
   const dispatch = useDispatch();
+  const rating = Math.round(item.rating) * 20;
+  const status = useTypeSelector(getAuthorization);
   return (
     <article
       className="cities__place-card place-card"
-      onMouseOver={() => dispatch(ActiveCard(item.id))}
+      onMouseOver={() => dispatch(activeCardAction(item.id))}
     >
       {item.isPremium && (
         <div className="place-card__mark">
@@ -28,7 +26,7 @@ function Card({ item}: CardScreenProps): JSX.Element {
         </div>
       )}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="/">
+        <Link to={`/offer/${item.id}`}>
           <img
             className="place-card__image"
             src={item.previewImage}
@@ -36,7 +34,7 @@ function Card({ item}: CardScreenProps): JSX.Element {
             height="200"
             alt="Place"
           />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -44,26 +42,44 @@ function Card({ item}: CardScreenProps): JSX.Element {
             <b className="place-card__price-value">{`\u20AC${item.price}`}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
-            <svg
-              style={item.isFavorite ? style.svg : style.svgN}
-              className="place-card__bookmark-icon"
-              width="18"
-              height="19"
-            >
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
+          <button  onClick={(e)=>{
+            e.preventDefault();
+            status === AuthorizationStatus.Auth ?
+              dispatch(favoritePushOffersAction(item))
+              : dispatch(redirectToRouteAction(AppRoute.SignIn));
+          }}
+          className="place-card__bookmark-button button" type="button"
+          >
+            {item.isFavorite ?
+              <svg
+                style={{fill:'#4481c3'}}
+                className="place-card__bookmark-icon"
+                width="18"
+                height="19"
+              >
+                <use xlinkHref="#icon-bookmark"></use>
+              </svg>:
+              <svg
+                style={{fill:'none'}}
+                className="place-card__bookmark-icon"
+                width="18"
+                height="19"
+              >
+                <use xlinkHref="#icon-bookmark"></use>
+              </svg>}
             <span className="visually-hidden">To bookmarks</span>
           </button>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: '80%' }}></span>
+            <span style={{ width: `${rating}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${item.id}`}>{item.title}</Link>
+          <Link to={`/offer/${item.id}`}>
+            {item.title}
+          </Link>
         </h2>
         <p className="place-card__type">{item.type}</p>
       </div>
@@ -71,4 +87,4 @@ function Card({ item}: CardScreenProps): JSX.Element {
   );
 }
 
-export default React.memo(Card,(prevProps,nextProps)=>prevProps.item === nextProps.item);
+export default Card;

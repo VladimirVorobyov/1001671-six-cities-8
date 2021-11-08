@@ -9,58 +9,102 @@ import {
   AuthorizationType,
   LogoutType,
   LoadOffersType,
-  RedirectToRouteType
+  RedirectToRouteType,
+  EmailUserType,
+  fullOfferType,
+  offersNearbyType,
+  CommentsType,
+  offersFavoriteType,
+  IsFavoriteType,
+  ChangeFavoriteType
 } from '../types/ActionType';
-import { ClientOffersType } from '../types/offers-type';
+import {
+  ClientOffersType,
+  ClientOfferType,
+  CommentsOfferType
+} from '../types/offers-type';
 import { AuthorizationStatus, AppRoute } from '../const';
 
-export const redirectToRoute = (payload: AppRoute): RedirectToRouteType => ({
+export const changeFavoriteAction = (payload: number): ChangeFavoriteType => ({
+  type: ActionType.ChangeFavorite,
+  payload,
+});
+
+export const isFavoriteOfferAction = (payload: ClientOfferType): IsFavoriteType => ({
+  type: ActionType.isFavorite,
+  payload,
+});
+
+export const commentsOfferAction = (payload: CommentsOfferType): CommentsType => ({
+  type: ActionType.Commnets,
+  payload,
+});
+export const offersFavoritesAction = (payload: ClientOffersType): offersFavoriteType => ({
+  type: ActionType.Favorites,
+  payload,
+});
+
+export const offersNearbyAction = (payload: ClientOffersType): offersNearbyType => ({
+  type: ActionType.OffersNearby,
+  payload,
+});
+export const detailedOfferAction = (payload: ClientOfferType): fullOfferType => ({
+  type: ActionType.ClientOffer,
+  payload,
+});
+
+export const emailAction = (payload: string): EmailUserType => ({
+  type: ActionType.EmailUser,
+  payload,
+});
+
+export const redirectToRouteAction = (payload: AppRoute): RedirectToRouteType => ({
   type: ActionType.RedirectToRoute,
   payload,
 });
 
-export const LoadOffers = (payload: ClientOffersType): LoadOffersType => ({
+export const loadOffersAction = (payload: ClientOffersType): LoadOffersType => ({
   type: ActionType.LoadOffers,
   payload,
 });
 
-export const requireAuthorization = (
+export const requireAuthorizationAction = (
   payload: AuthorizationStatus,
 ): AuthorizationType => ({
   type: ActionType.RequireAuthorization,
   payload,
 });
 
-export const requireLogout = (): LogoutType => ({
+export const requireLogoutAction = (): LogoutType => ({
   type: ActionType.RequireLogout,
 });
 
-export const ActiveCard = (payload: number): ActiveCardType => ({
+export const activeCardAction = (payload: number): ActiveCardType => ({
   type: ActionType.ActiveCard,
   payload,
 });
 
-export const MapAction = (payload: string): MapActionType => ({
+export const mapAction = (payload: string): MapActionType => ({
   type: ActionType.MapAction,
   payload,
 });
 
-export const CityAction = (payload: string): CityActionType => ({
+export const cityAction = (payload: string): CityActionType => ({
   type: ActionType.CityAction,
   payload,
 });
 
-export const LowToHighAction = (payload: ClientOffersType): LowToHighActionType => ({
+export const lowToHighAction = (payload: ClientOffersType): LowToHighActionType => ({
   type: ActionType.LowToHigh,
   payload,
 });
 
-export const HighToLowAction = (payload: ClientOffersType): HighToLowActionType => ({
+export const highToLowAction = (payload: ClientOffersType): HighToLowActionType => ({
   type: ActionType.HighToLow,
   payload,
 });
 
-export const TopRatedAction = (payload: ClientOffersType): TopRatedActionType => ({
+export const topRatedAction = (payload: ClientOffersType): TopRatedActionType => ({
   type: ActionType.TopRated,
   payload,
 });
