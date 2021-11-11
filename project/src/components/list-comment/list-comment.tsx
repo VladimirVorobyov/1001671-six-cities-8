@@ -1,6 +1,6 @@
 import { useTypeSelector } from '../../hooks/useTypeSelector';
 import { getComments } from '../../store/full-offer/selectors';
-import UserComment from './user-comment';
+import UserComment from '../user-comment/user-comment';
 
 function ListComment (): JSX.Element{
   const comments = useTypeSelector(getComments);

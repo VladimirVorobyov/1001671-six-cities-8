@@ -1,10 +1,10 @@
 import { useEffect} from 'react';
 import Card from '../card/card';
 import Comment from '../comment/comment';
-import ListComment from '../user-comment/list-comment';
-import DescriptionRoom from './description-room';
-import FullImgRoom from './full-img-room';
-import InsideList from './inside-list';
+import ListComment from '../list-comment/list-comment';
+import DescriptionRoom from './description-room/description-room';
+import FullImgRoom from './full-img-room/full-img-room';
+import InsideList from './inside-list/inside-list';
 import Map from '../map/map';
 import { useTypeSelector } from '../../hooks/useTypeSelector';
 import Header from '../header/header';
