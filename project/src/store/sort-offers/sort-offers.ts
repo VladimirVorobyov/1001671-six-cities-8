@@ -1,18 +1,24 @@
 import { ActionType, Actions } from '../../types/ActionType';
 import { SortOffers } from '../../types/State';
-import mapMock from '../../map/map';
-const DEFAULT_CITY = mapMock[0];
+import map from '../../map/map';
+export const DEFAULT_CITY = map[0];
 
 const initialState: SortOffers = {
   offersLoad: [],
-  cities: mapMock,
+  cities: map,
   offers: [],
   map: DEFAULT_CITY,
   active: 0,
+  sortCards:'',
 };
 
 const sortOffers = (state = initialState, action: Actions): SortOffers => {
   switch (action.type) {
+    case ActionType.SortCardsOffers:
+      return{
+        ...state,
+        sortCards: action.payload,
+      };
     case ActionType.isFavorite:
       return {
         ...state,
@@ -32,7 +38,7 @@ const sortOffers = (state = initialState, action: Actions): SortOffers => {
     case ActionType.CityAction:
       return {
         ...state,
-        cities: mapMock.map((item) => {
+        cities: map.map((item) => {
           item.active = false;
           if (action.payload === item.city) {
             item.active = true;
@@ -44,11 +50,12 @@ const sortOffers = (state = initialState, action: Actions): SortOffers => {
           [...state.offersLoad].filter(
             (item) => item.city.name === action.payload,
           ),
+        sortCards:'',
       };
     case ActionType.MapAction:
       return {
         ...state,
-        map: [...mapMock].find((item) => item.city === action.payload),
+        map: [...map].find((item) => item.city === action.payload),
       };
     case ActionType.LowToHigh:
       return {

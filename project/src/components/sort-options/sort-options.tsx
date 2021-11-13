@@ -1,54 +1,68 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { ClientOffersType } from '../../types/offers-type';
 import {
   lowToHighAction,
   highToLowAction,
-  topRatedAction
+  topRatedAction,
+  SortCardsOffersAction
 } from '../../store/action';
+import { useTypeSelector } from '../../hooks/useTypeSelector';
+import { getSortValue } from '../../store/sort-offers/selectors';
 type SortProps = {
   offersActive: ClientOffersType;
 };
 
 function SortOptions({ offersActive }: SortProps): JSX.Element {
   const dispatch = useDispatch();
+  const value = useTypeSelector(getSortValue);
+  useEffect(()=>{
+    value === 'lowTo' && dispatch(lowToHighAction(offersActive));
+    value === 'highTo' && dispatch(highToLowAction(offersActive));
+    value === 'topRated' && dispatch(topRatedAction(offersActive));
+  },[value]);
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
-      <span className="places__sorting-type" tabIndex={0}>
-        Popular
-        <svg className="places__sorting-arrow" width="7" height="4">
-          <use xlinkHref="#icon-arrow-select"></use>
-        </svg>
-      </span>
-      <ul className="places__options places__options--custom places__options--opened">
-        <li className="places__option places__option--active" tabIndex={0}>
+      <select
+        value={value}
+        onChange={(e) => dispatch(SortCardsOffersAction(e.target.value))}
+        className="places__options places__options--custom places__options--opened"
+      >
+        <option
+          value=""
+          className="places__option places__option--active"
+          tabIndex={0}
+        >
           Popular
-        </li>
-        <li
-          onClick={() => dispatch(lowToHighAction(offersActive))}
+        </option>
+        <option
+          value="lowTo"
+          onChange={() => dispatch(lowToHighAction(offersActive))}
           className="places__option"
           tabIndex={0}
         >
           Price: low to high
-        </li>
-        <li
+        </option>
+        <option
+          value="highTo"
           className="places__option"
           tabIndex={0}
-          onClick={() => dispatch(highToLowAction(offersActive))}
+          onChange={() => dispatch(highToLowAction(offersActive))}
         >
           Price: high to low
-        </li>
-        <li
+        </option>
+        <option
+          value="topRated"
           className="places__option"
           tabIndex={0}
-          onClick={() => dispatch(topRatedAction(offersActive))}
+          onChange={() => dispatch(topRatedAction(offersActive))}
         >
           Top rated first
-        </li>
-      </ul>
+        </option>
+      </select>
     </form>
   );
 }
 
-export default React.memo(SortOptions);
+export default SortOptions;

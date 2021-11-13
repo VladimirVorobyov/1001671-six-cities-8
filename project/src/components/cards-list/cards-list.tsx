@@ -24,16 +24,13 @@ function CardsList({offersActive}: ListProps): JSX.Element {
           <SortOptions offersActive={offersActive} />
           <div className="cities__places-list places__list tabs__content">
             {offersActive.map((item) => (
-              <Card
-                key={item.id}
-                item={item}
-              />
+              <Card key={item.id} item={item} />
             ))}
           </div>
         </section>
         <div className="cities__right-section">
           <section className="cities__map map">
-            <Map offers={offersActive}/>
+            {offersActive.length && <Map offers={offersActive} />}
           </section>
         </div>
       </div>

@@ -23,11 +23,16 @@ function App(): JSX.Element {
     <BrowserRouter history={browserHistory}>
       <Switch>
         <Route path={AppRoute.Main} exact>
-          <Main offersActive={offersActive}/>
+          <Main offersActive={offersActive} />
         </Route>
         <Route path={AppRoute.SignIn} exact>
           <Login />
         </Route>
+        <PrivateRoute
+          path={AppRoute.SignIn}
+          exact
+          render={() => <Main offersActive={offersActive} />}
+        />
         <PrivateRoute
           path={AppRoute.Favorites}
           exact

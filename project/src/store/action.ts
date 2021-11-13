@@ -1,3 +1,4 @@
+import { SortCardsOffersType } from './../types/ActionType';
 import {
   MapActionType,
   ActionType,
@@ -16,7 +17,8 @@ import {
   CommentsType,
   offersFavoriteType,
   IsFavoriteType,
-  ChangeFavoriteType
+  ChangeFavoriteType,
+  ClearStoreType
 } from '../types/ActionType';
 import {
   ClientOffersType,
@@ -24,6 +26,15 @@ import {
   CommentsOfferType
 } from '../types/offers-type';
 import { AuthorizationStatus, AppRoute } from '../const';
+
+export const SortCardsOffersAction = (payload: string): SortCardsOffersType => ({
+  type: ActionType.SortCardsOffers,
+  payload,
+});
+
+export const clearStoreAction = ():ClearStoreType => ({
+  type: ActionType.ClearStore,
+});
 
 export const changeFavoriteAction = (payload: number): ChangeFavoriteType => ({
   type: ActionType.ChangeFavorite,

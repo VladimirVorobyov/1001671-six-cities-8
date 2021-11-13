@@ -24,6 +24,7 @@ export type SortOffers = {
   cities: MapsType;
   map: MapType | undefined;
   active: number;
+  sortCards: string;
 };
 
 export type State = RootState;

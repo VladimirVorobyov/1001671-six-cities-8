@@ -4,13 +4,21 @@ import UserComment from '../user-comment/user-comment';
 
 function ListComment (): JSX.Element{
   const comments = useTypeSelector(getComments);
-  return(
+  if(comments.length>10){
+    comments.slice(0,10);
+  }
+  return (
     <>
-      <h2 className="reviews__title">Reviews &middot;
+      <h2 className="reviews__title">
+        Reviews &middot;
         <span className="reviews__amount">{comments.length}</span>
       </h2>
       <ul className="reviews__list">
-        {comments.map((item)=> <UserComment key={item.id}  offer={item}/>)}
+        {comments
+          .sort((a, b) => +new Date(b.date) - +new Date(a.date))
+          .map((item) => (
+            <UserComment key={item.id} offer={item} />
+          ))}
       </ul>
     </>
   );

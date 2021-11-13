@@ -1,15 +1,18 @@
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { adaptTypeHouse } from '../../const';
 import { favoritePopOffersAction } from '../../store/api-action';
 import { ClientOfferType } from '../../types/offers-type';
 
 type CardProps = {
   card: ClientOfferType;
+  isLooding : (param:boolean)=>void;
 };
 
-function FavoritesCard ({card}:CardProps): JSX.Element{
+function FavoritesCard ({card,isLooding}:CardProps): JSX.Element{
   const rating = Math.round(card.rating) * 20;
   const dispatch = useDispatch();
+  const typeHouse = adaptTypeHouse(card.type);
   return (
     <article className="favorites__card place-card">
       <div className="favorites__image-wrapper place-card__image-wrapper">
@@ -29,12 +32,14 @@ function FavoritesCard ({card}:CardProps): JSX.Element{
             <b className="place-card__price-value">{card.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button onClick={(event)=>{
-            event.preventDefault();
-            dispatch(favoritePopOffersAction(card.id));
-          }}
-          className="place-card__bookmark-button place-card__bookmark-button--active button"
-          type="button"
+          <button
+            onClick={async (event) => {
+              event.preventDefault();
+              await dispatch(favoritePopOffersAction(card.id));
+              isLooding(false);
+            }}
+            className="place-card__bookmark-button place-card__bookmark-button--active button"
+            type="button"
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
@@ -51,7 +56,7 @@ function FavoritesCard ({card}:CardProps): JSX.Element{
         <h2 className="place-card__name">
           <Link to={`/offer/${card.id}`}>{card.title}</Link>
         </h2>
-        <p className="place-card__type">{card.type}</p>
+        <p className="place-card__type">{typeHouse}</p>
       </div>
     </article>
   );

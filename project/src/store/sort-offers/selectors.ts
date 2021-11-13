@@ -8,3 +8,4 @@ export const getOffers = (state: State): ClientOffersType =>
 export const getOffersLoad = (state: State): ClientOffersType =>
   state[NameSpace.DATA].offersLoad;
 export const getActive = (state: State): number => state[NameSpace.DATA].active;
+export const getSortValue = (state: State): string => state[NameSpace.DATA].sortCards;

@@ -5,15 +5,18 @@ import { Provider } from 'react-redux';
 import store from './store/index';
 import {ThunkAppDispatch} from './types/ActionType';
 import { fetchOffersnAction, checkAuthAction } from './store/api-action';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 (store.dispatch as ThunkAppDispatch)(checkAuthAction());
 (store.dispatch as ThunkAppDispatch)(fetchOffersnAction());
-// (store.dispatch as ThunkAppDispatch)(favoriteOffersAction());
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App/>
+      <ToastContainer />
+      <App />
     </Provider>
   </React.StrictMode>,
-  document.getElementById('root'));
+  document.getElementById('root'),
+);

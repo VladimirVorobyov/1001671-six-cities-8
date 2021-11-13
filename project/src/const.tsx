@@ -17,3 +17,12 @@ export enum APIRoute {
   Logout = '/logout',
   FullOffer = '/hotels/: id',
 }
+
+export const adaptTypeHouse = (house:string):string=> {
+  switch(house){
+    case 'apartment': return  'Apartment';
+    case 'room': return 'Private Room';
+    case 'house': return 'House';
+    default: return 'Hotel';
+  }
+};

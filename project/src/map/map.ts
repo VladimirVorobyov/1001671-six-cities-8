@@ -1,6 +1,6 @@
 import { MapsType} from '../types/offers-type';
 
-const mapMock: MapsType = [
+const map : MapsType = [
   {
     city: 'Paris',
     lat: 48.8512,
@@ -45,4 +45,4 @@ const mapMock: MapsType = [
   },
 ];
 
-export default mapMock;
+export default map;

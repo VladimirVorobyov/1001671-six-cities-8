@@ -25,8 +25,19 @@ export enum ActionType {
   OffersNearby = 'data/nearby',
   Commnets = 'data/comments',
   Favorites = 'data/favorites',
-  isFavorite= 'is Favorite',
+  isFavorite = 'is Favorite',
   ChangeFavorite = 'change favorite',
+  ClearStore = 'clear store',
+  SortCardsOffers= 'sort cards'
+}
+
+export type SortCardsOffersType = {
+  type: ActionType.SortCardsOffers;
+  payload: string;
+};
+
+export type ClearStoreType = {
+  type: ActionType.ClearStore;
 }
 
 export type ChangeFavoriteType = {
@@ -129,9 +140,11 @@ export type Actions =
   | fullOfferType
   | offersNearbyType
   | CommentsType
-  |offersFavoriteType
-  |IsFavoriteType
-  |ChangeFavoriteType;
+  | offersFavoriteType
+  | IsFavoriteType
+  | ChangeFavoriteType
+  | ClearStoreType
+  | SortCardsOffersType;
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<
     R,
