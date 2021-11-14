@@ -11,6 +11,7 @@ import Loading from '../loading/loading';
 import browserHistory from '../../browser-history';
 import {getLoaded,getAuthorization} from '../../store/authorization/selectors';
 import { getOffers } from '../../store/sort-offers/selectors';
+import RedirectPrivate from '../redirect-private/redirect-private';
 
 function App(): JSX.Element {
   const authorizationStatus = useTypeSelector(getAuthorization);
@@ -25,13 +26,10 @@ function App(): JSX.Element {
         <Route path={AppRoute.Main} exact>
           <Main offersActive={offersActive} />
         </Route>
-        <Route path={AppRoute.SignIn} exact>
-          <Login />
-        </Route>
-        <PrivateRoute
+        <RedirectPrivate
           path={AppRoute.SignIn}
           exact
-          render={() => <Main offersActive={offersActive} />}
+          render={() => <Login/>}
         />
         <PrivateRoute
           path={AppRoute.Favorites}

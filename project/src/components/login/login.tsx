@@ -2,17 +2,9 @@ import Logo from '../logo/logo';
 import { useDispatch } from 'react-redux';
 import { useRef, FormEvent,memo, useCallback } from 'react';
 import { loginAction } from '../../store/api-action';
-import { AuthorizationStatus } from '../../const';
-import Main from '../main/main';
-import { useTypeSelector } from '../../hooks/useTypeSelector';
-import { getOffers } from '../../store/sort-offers/selectors';
-import { getAuthorization } from '../../store/authorization/selectors';
 
 function Login (): JSX.Element {
-  const authorizationStatus = useTypeSelector(getAuthorization);
-  const offersActive = useTypeSelector(getOffers);
   const dispatch = useDispatch();
-
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
@@ -29,9 +21,7 @@ function Login (): JSX.Element {
     },
     [dispatch],
   );
-  return authorizationStatus === AuthorizationStatus.Auth ? (
-    <Main offersActive={offersActive} />
-  ) : (
+  return(
     <>
       <div style={{ display: 'none' }}>
         <svg xmlns="http://www.w3.org/2000/svg">
@@ -116,7 +106,6 @@ function Login (): JSX.Element {
         </main>
       </div>
     </>
-  );
-}
+  );}
 
 export default memo(Login);
